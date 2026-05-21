@@ -11,7 +11,7 @@ export default function BrainPanel({ selectedNode }: BrainPanelProps) {
 
   return (
     <aside
-      className="absolute bottom-10 right-10 z-20 max-h-[82vh] w-[560px] overflow-y-auto rounded-[2rem] border bg-[#080D1C]/96 p-9 text-white shadow-[0_0_90px_rgba(0,0,0,0.72)] backdrop-blur-xl"
+      className="absolute bottom-8 right-8 z-20 max-h-[82vh] w-[900px] overflow-y-auto rounded-[2rem] border bg-[#080D1C]/96 p-9 text-white shadow-[0_0_90px_rgba(0,0,0,0.72)] backdrop-blur-xl"
       style={{
         borderColor: `${selectedNode.color}35`,
         boxShadow: `0 0 80px rgba(0,0,0,0.72), 0 0 52px ${selectedNode.color}18`,

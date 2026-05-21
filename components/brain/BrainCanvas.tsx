@@ -177,7 +177,7 @@ export default function BrainCanvas() {
       </ReactFlow>
 
       <BrainPanel selectedNode={selectedNode} />
-      <div className="absolute right-10 top-10 z-20 flex w-[520px] flex-col gap-4">
+      <div className="absolute right-8 top-8 z-20 grid w-[900px] grid-cols-3 gap-5">
         {teachingMissions.map((mission) => (
           <TeachingMissionCard key={mission.id} mission={mission} />
         ))}
