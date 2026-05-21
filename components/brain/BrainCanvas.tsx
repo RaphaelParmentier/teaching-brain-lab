@@ -3,7 +3,6 @@
 import React, { useMemo, useState } from "react";
 import ReactFlow, {
   Background,
-  Controls,
   Edge,
   Node,
   Position,
@@ -23,15 +22,12 @@ const categoryLabels: Record<string, string> = {
   domain: "Domain expertise",
 };
 
-const graphOffset = {
-  x: 520,
-  y: 80,
-};
-
-const graphScale = 1.45;
+const graphOffset = { x: 580, y: 110 };
+const graphScale = 1.75;
 
 export default function BrainCanvas() {
   const [selectedNode, setSelectedNode] = useState<BrainNodeData | null>(null);
+  const [mouse, setMouse] = useState({ x: 1100, y: 420 });
 
   const nodes: Node[] = useMemo(
     () =>
@@ -45,20 +41,20 @@ export default function BrainCanvas() {
         targetPosition: Position.Left,
         data: {
           label: (
-            <div className="group min-w-[310px] rounded-[1.8rem] border border-white/10 bg-[#0A0E1C]/95 px-8 py-7 shadow-[0_0_55px_rgba(0,0,0,0.55)] backdrop-blur-xl transition duration-300 hover:scale-[1.035] hover:border-orange-300/45 hover:shadow-[0_0_70px_rgba(249,115,22,0.22)]">
+            <div className="group min-w-[330px] rounded-[2rem] border border-white/10 bg-[#080D1C]/95 px-8 py-7 shadow-[0_0_60px_rgba(0,0,0,0.65)] backdrop-blur-xl transition duration-300 hover:scale-[1.035] hover:border-orange-300/50 hover:shadow-[0_0_75px_rgba(249,115,22,0.24)]">
               <div
                 className="mb-5 h-3 w-3 rounded-full"
                 style={{
                   backgroundColor: node.color,
-                  boxShadow: `0 0 24px ${node.color}`,
+                  boxShadow: `0 0 26px ${node.color}`,
                 }}
               />
 
-              <p className="text-sm font-semibold uppercase tracking-[0.36em] text-slate-400">
+              <p className="text-sm font-semibold uppercase tracking-[0.38em] text-slate-400">
                 {categoryLabels[node.category]}
               </p>
 
-              <p className="mt-4 text-[1.65rem] font-semibold leading-[1.05] tracking-[-0.045em] text-white">
+              <p className="mt-4 text-[1.8rem] font-semibold leading-[1.02] tracking-[-0.05em] text-white">
                 {node.label}
               </p>
 
@@ -67,7 +63,7 @@ export default function BrainCanvas() {
                   {node.skills.slice(0, 3).map((skill) => (
                     <span
                       key={skill}
-                      className="rounded-full border border-white/12 bg-white/8 px-3.5 py-1 text-xs font-medium text-slate-200 shadow-inner"
+                      className="rounded-full border border-white/12 bg-white/8 px-3.5 py-1 text-xs font-medium text-slate-200"
                     >
                       {skill}
                     </span>
@@ -100,34 +96,47 @@ export default function BrainCanvas() {
     animated: true,
     className: "neural-edge",
     style: {
-      stroke: "rgba(125, 211, 252, 0.88)",
+      stroke: "rgba(125, 211, 252, 0.92)",
       strokeWidth: 3,
       strokeDasharray: "8 8",
-      filter: "drop-shadow(0 0 9px rgba(56, 189, 248, 0.8))",
+      filter: "drop-shadow(0 0 10px rgba(56, 189, 248, 0.85))",
     },
   }));
 
   return (
-    <section className="relative h-screen w-full overflow-hidden bg-[#050505] text-white">
-      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.038)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.038)_1px,transparent_1px)] bg-[size:52px_52px]" />
+    <section
+      className="relative h-screen w-full overflow-hidden bg-[#050505] text-white"
+      onMouseMove={(event) => setMouse({ x: event.clientX, y: event.clientY })}
+    >
+      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.04)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.04)_1px,transparent_1px)] bg-[size:52px_52px]" />
 
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_64%_43%,rgba(249,115,22,0.34),transparent_30%),radial-gradient(circle_at_72%_60%,rgba(234,88,12,0.20),transparent_34%),radial-gradient(circle_at_58%_76%,rgba(124,45,18,0.22),transparent_34%)]" />
+      <div
+        className="pointer-events-none absolute inset-0 transition duration-300"
+        style={{
+          background: `
+            radial-gradient(620px circle at ${mouse.x}px ${mouse.y}px, rgba(249,115,22,0.30), transparent 44%),
+            radial-gradient(circle at 68% 42%, rgba(249,115,22,0.34), transparent 31%),
+            radial-gradient(circle at 72% 68%, rgba(124,45,18,0.24), transparent 37%),
+            radial-gradient(circle at 52% 52%, rgba(15,23,42,0.88), transparent 42%)
+          `,
+        }}
+      />
 
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_64%_46%,transparent_0%,rgba(5,5,5,0.18)_38%,rgba(5,5,5,0.90)_86%)]" />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_65%_50%,transparent_0%,rgba(5,5,5,0.18)_42%,rgba(5,5,5,0.94)_90%)]" />
 
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-56 bg-gradient-to-b from-black/85 to-transparent" />
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-56 bg-gradient-to-b from-black/90 to-transparent" />
 
-      <div className="absolute left-10 top-10 z-10 max-w-[500px]">
+      <div className="absolute left-12 top-10 z-10 max-w-[680px]">
         <div className="inline-flex items-center gap-3 rounded-full border border-orange-400/30 bg-orange-400/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.3em] text-orange-300 shadow-[0_0_35px_rgba(249,115,22,0.18)]">
           <span className="h-2 w-2 rounded-full bg-orange-400 shadow-[0_0_18px_rgba(249,115,22,0.95)]" />
           RP Systems • Teaching
         </div>
 
-        <h1 className="mt-7 text-6xl font-semibold leading-[0.88] tracking-[-0.065em] text-white md:text-8xl">
+        <h1 className="mt-7 max-w-[640px] text-5xl font-semibold leading-[0.92] tracking-[-0.06em] text-white md:text-7xl">
           Designing learning systems with data, AI and scientific rigor.
         </h1>
 
-        <p className="mt-7 max-w-md text-base leading-7 text-slate-300 md:text-lg">
+        <p className="mt-7 max-w-[460px] text-base leading-7 text-slate-300 md:text-lg">
           Interactive teaching architecture connecting statistical reasoning,
           analytics, AI systems, software engineering and research-oriented
           thinking.
@@ -138,22 +147,22 @@ export default function BrainCanvas() {
         nodes={nodes}
         edges={edges}
         fitView
-        fitViewOptions={{
-          padding: 0.11,
-        }}
+        fitViewOptions={{ padding: 0.08 }}
         minZoom={0.34}
-        maxZoom={1.15}
+        maxZoom={1.05}
         nodesDraggable={false}
         nodesConnectable={false}
-        panOnScroll
-        zoomOnScroll
+        panOnDrag={false}
+        panOnScroll={false}
+        zoomOnScroll={false}
+        zoomOnPinch={false}
+        proOptions={{ hideAttribution: true }}
         onNodeClick={(_, node) => {
           const clickedNode = brainNodes.find((item) => item.id === node.id);
           setSelectedNode(clickedNode ?? null);
         }}
       >
         <Background color="#1f2937" gap={32} />
-        <Controls />
       </ReactFlow>
 
       <BrainPanel selectedNode={selectedNode} />
