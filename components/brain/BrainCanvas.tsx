@@ -20,7 +20,7 @@ const categoryLabels: Record<string, string> = {
   domain: "Domain expertise",
 };
 
-const graphOffset = { x: 620, y: 135 };
+const graphOffset = { x: -100, y: 135 };
 const graphScale = 1.9;
 
 export default function BrainCanvas() {
@@ -158,10 +158,9 @@ export default function BrainCanvas() {
       <ReactFlow
         nodes={nodes}
         edges={edges}
-        fitView
-        fitViewOptions={{ padding: 0.06 }}
-        minZoom={0.31}
-        maxZoom={1}
+        defaultViewport={{ x: 1350, y: 400, zoom: 1.2 }}
+        minZoom={1.2}
+        maxZoom={1.2}
         nodesDraggable={false}
         nodesConnectable={false}
         panOnDrag={false}
@@ -178,12 +177,12 @@ export default function BrainCanvas() {
       </ReactFlow>
 
       <BrainPanel selectedNode={selectedNode} />
-      <div className="absolute bottom-10 left-12 z-20 grid w-[760px] grid-cols-3 gap-4">
+      <div className="absolute right-10 top-10 z-20 flex w-[520px] flex-col gap-4">
         {teachingMissions.map((mission) => (
           <TeachingMissionCard key={mission.id} mission={mission} />
         ))}
-        <LearningJourney />
       </div>
-    </section>
+    <LearningJourney />
+  </section>
   );
 }
