@@ -3,13 +3,11 @@
 import React, { useMemo, useState } from "react";
 import ReactFlow, { Background, Edge, Node, Position } from "reactflow";
 import "reactflow/dist/style.css";
-import { teachingMissions } from "@/data/teaching-missions";
-import TeachingMissionCard from "@/components/teaching/TeachingMissionCard";
-import LearningJourney from "@/components/journey/LearningJourney";
 
 import { brainNodes } from "@/data/brain-nodes";
 import type { BrainNodeData } from "@/data/brain-nodes";
 import BrainPanel from "@/components/brain/BrainPanel";
+import LearningJourney from "@/components/journey/LearningJourney";
 
 const categoryLabels: Record<string, string> = {
   core: "Core identity",
@@ -20,78 +18,104 @@ const categoryLabels: Record<string, string> = {
   domain: "Domain expertise",
 };
 
-const graphOffset = { x: -100, y: 135 };
+const graphOffset = { x: 0, y: 135 };
 const graphScale = 1.9;
 
+const routes: Record<string, string[]> = {
+  teaching: [
+    "teaching-statistics",
+    "teaching-data-science",
+    "teaching-ai",
+    "teaching-development",
+    "teaching-healthcare",
+  ],
+  statistics: ["teaching-statistics", "statistics-healthcare"],
+  "data-science": ["teaching-data-science", "data-development"],
+  ai: ["teaching-ai", "ai-development"],
+  development: ["teaching-development", "ai-development", "data-development"],
+  healthcare: ["teaching-healthcare", "statistics-healthcare"],
+};
+
 export default function BrainCanvas() {
-  const [selectedNode, setSelectedNode] = useState<BrainNodeData | null>(null);
-  const [mouse, setMouse] = useState({ x: 1150, y: 420 });
+  const [selectedNode, setSelectedNode] = useState<BrainNodeData | null>(
+    brainNodes[0]
+  );  
+  const [mouse, setMouse] = useState({ x: 1200, y: 420 });
+
+  const activeNodeId = selectedNode?.id ?? null;
+  const activeRouteIds = activeNodeId ? routes[activeNodeId] ?? [] : [];
 
   const nodes: Node[] = useMemo(
     () =>
-      brainNodes.map((node) => ({
-        id: node.id,
-        position: {
-          x: node.x * graphScale + graphOffset.x,
-          y: node.y * graphScale + graphOffset.y,
-        },
-        sourcePosition: Position.Right,
-        targetPosition: Position.Left,
-        data: {
-          label: (
-            <div
-              className="group min-w-[360px] rounded-[2rem] border bg-[#080D1C]/96 px-9 py-8 shadow-[0_0_65px_rgba(0,0,0,0.72)] backdrop-blur-xl transition duration-300 hover:scale-[1.035]"
-              style={{
-                borderColor: `${node.color}33`,
-                boxShadow: `0 0 55px rgba(0,0,0,0.72), 0 0 42px ${node.color}18`,
-              }}
-            >
+      brainNodes.map((node) => {
+        const isActive = activeNodeId === node.id;
+
+        return {
+          id: node.id,
+          position: {
+            x: node.x * graphScale + graphOffset.x,
+            y: node.y * graphScale + graphOffset.y,
+          },
+          sourcePosition: Position.Right,
+          targetPosition: Position.Left,
+          data: {
+            label: (
               <div
-                className="mb-5 h-3.5 w-3.5 rounded-full"
+                className="group min-w-[360px] rounded-[2rem] border bg-[#080D1C]/96 px-9 py-8 backdrop-blur-xl transition-shadow duration-300"
                 style={{
-                  backgroundColor: node.color,
-                  boxShadow: `0 0 28px ${node.color}`,
+                  borderColor: isActive ? `${node.color}88` : `${node.color}33`,
+                  boxShadow: isActive
+                    ? `0 0 90px ${node.color}44, 0 0 140px ${node.color}22, 0 0 65px rgba(0,0,0,0.9)`
+                    : `0 0 45px rgba(0,0,0,0.72), 0 0 30px ${node.color}10`,
                 }}
-              />
-
-              <p
-                className="text-sm font-bold uppercase tracking-[0.38em]"
-                style={{ color: `${node.color}` }}
               >
-                {categoryLabels[node.category]}
-              </p>
+                <div
+                  className="mb-5 h-3.5 w-3.5 rounded-full"
+                  style={{
+                    backgroundColor: node.color,
+                    boxShadow: `0 0 28px ${node.color}`,
+                  }}
+                />
 
-              <p className="mt-4 text-[2rem] font-semibold leading-[1.02] tracking-[-0.055em] text-white">
-                {node.label}
-              </p>
+                <p
+                  className="text-sm font-bold uppercase tracking-[0.38em]"
+                  style={{ color: node.color }}
+                >
+                  {categoryLabels[node.category]}
+                </p>
 
-              {node.skills && (
-                <div className="mt-6 flex flex-wrap gap-2.5">
-                  {node.skills.slice(0, 3).map((skill) => (
-                    <span
-                      key={skill}
-                      className="rounded-full border px-3.5 py-1.5 text-xs font-semibold"
-                      style={{
-                        borderColor: `${node.color}40`,
-                        backgroundColor: `${node.color}18`,
-                        color: node.color,
-                      }}
-                    >
-                      {skill}
-                    </span>
-                  ))}
-                </div>
-              )}
-            </div>
-          ),
-        },
-        style: {
-          background: "transparent",
-          border: "none",
-          padding: 0,
-        },
-      })),
-    []
+                <p className="mt-4 text-[2rem] font-semibold leading-[1.02] tracking-[-0.055em] text-white">
+                  {node.label}
+                </p>
+
+                {node.skills && (
+                  <div className="mt-6 flex flex-wrap gap-2.5">
+                    {node.skills.slice(0, 3).map((skill) => (
+                      <span
+                        key={skill}
+                        className="rounded-full border px-3.5 py-1.5 text-xs font-semibold"
+                        style={{
+                          borderColor: `${node.color}42`,
+                          backgroundColor: `${node.color}18`,
+                          color: node.color,
+                        }}
+                      >
+                        {skill}
+                      </span>
+                    ))}
+                  </div>
+                )}
+              </div>
+            ),
+          },
+          style: {
+            background: "transparent",
+            border: "none",
+            padding: 0,
+          },
+        };
+      }),
+    [activeNodeId]
   );
 
   const edges: Edge[] = [
@@ -103,40 +127,56 @@ export default function BrainCanvas() {
     { id: "statistics-healthcare", source: "statistics", target: "healthcare" },
     { id: "ai-development", source: "ai", target: "development" },
     { id: "data-development", source: "data-science", target: "development" },
-  ].map((edge) => ({
-    ...edge,
-    animated: true,
-    className: "neural-edge",
-    style: {
-      stroke: "rgba(125, 211, 252, 0.92)",
-      strokeWidth: 3,
-      strokeDasharray: "8 8",
-      filter: "drop-shadow(0 0 10px rgba(56, 189, 248, 0.85))",
-    },
-  }));
+  ].map((edge) => {
+    const isActive = activeRouteIds.includes(edge.id);
+
+    return {
+      ...edge,
+      animated: true,
+      className: "neural-edge",
+      style: {
+        stroke: isActive
+          ? "rgba(125, 211, 252, 1)"
+          : "rgba(125, 211, 252, 0.18)",
+        strokeWidth: isActive ? 5 : 1.5,
+        strokeDasharray: "8 8",
+        filter: isActive
+          ? "drop-shadow(0 0 18px rgba(56, 189, 248, 1))"
+          : "drop-shadow(0 0 3px rgba(56, 189, 248, 0.18))",
+      },
+    };
+  });
 
   return (
     <section
       className="relative h-screen w-full overflow-hidden bg-[#050505] text-white"
       onMouseMove={(event) => setMouse({ x: event.clientX, y: event.clientY })}
     >
-      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.04)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.04)_1px,transparent_1px)] bg-[size:52px_52px]" />
+      <div className="pointer-events-none absolute inset-0 bg-[#050505]" />
 
       <div
-        className="pointer-events-none absolute inset-0 transition duration-300"
+        className="pointer-events-none absolute inset-0"
+        style={{
+          background:
+            "linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px)",
+          backgroundSize: "52px 52px",
+        }}
+      />
+
+      <div
+        className="pointer-events-none absolute inset-0"
         style={{
           background: `
-            radial-gradient(560px circle at ${mouse.x}px ${mouse.y}px, rgba(249,115,22,0.26), transparent 44%),
-            radial-gradient(circle at 63% 43%, rgba(249,115,22,0.30), transparent 33%),
-            radial-gradient(circle at 72% 66%, rgba(124,45,18,0.22), transparent 38%),
-            radial-gradient(circle at 58% 52%, rgba(15,23,42,0.70), transparent 44%)
+            radial-gradient(
+              420px circle at ${mouse.x}px ${mouse.y}px,
+              rgba(249,115,22,0.08),
+              transparent 60%
+            )
           `,
         }}
       />
 
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_65%_50%,transparent_0%,rgba(5,5,5,0.14)_44%,rgba(5,5,5,0.94)_92%)]" />
-
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-56 bg-gradient-to-b from-black/90 to-transparent" />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(0,0,0,0.25)_60%,rgba(0,0,0,0.92)_100%)]" />
 
       <div className="absolute left-12 top-10 z-10 max-w-[560px]">
         <div className="inline-flex items-center gap-3 rounded-full border border-orange-400/30 bg-orange-400/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.3em] text-orange-300 shadow-[0_0_35px_rgba(249,115,22,0.18)]">
@@ -153,6 +193,10 @@ export default function BrainCanvas() {
           analytics, AI systems, software engineering and research-oriented
           thinking.
         </p>
+      </div>
+
+      <div className="absolute right-10 top-10 z-20">
+        <LearningJourney />
       </div>
 
       <ReactFlow
@@ -177,12 +221,6 @@ export default function BrainCanvas() {
       </ReactFlow>
 
       <BrainPanel selectedNode={selectedNode} />
-      <div className="absolute right-8 top-8 z-20 grid w-[900px] grid-cols-3 gap-5">
-        {teachingMissions.map((mission) => (
-          <TeachingMissionCard key={mission.id} mission={mission} />
-        ))}
-      </div>
-    <LearningJourney />
-  </section>
+    </section>
   );
 }

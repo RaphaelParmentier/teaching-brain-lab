@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { learningPath } from "@/data/learning-path";
+import { teachingMissions } from "@/data/teaching-missions";
 
 export default function LearningJourney() {
   const [isOpen, setIsOpen] = useState(false);
@@ -11,15 +12,15 @@ export default function LearningJourney() {
     <>
       <button
         onClick={() => setIsOpen(true)}
-        className="absolute bottom-10 left-[430px] z-30 rounded-full border border-orange-400/30 bg-orange-400/10 px-6 py-3 text-sm font-semibold uppercase tracking-[0.22em] text-orange-200 shadow-[0_0_35px_rgba(249,115,22,0.18)] backdrop-blur-xl transition hover:bg-orange-400/20"
+        className="rounded-full border border-orange-400/30 bg-orange-400/10 px-6 py-3 text-sm font-semibold uppercase tracking-[0.22em] text-orange-200 shadow-[0_0_35px_rgba(249,115,22,0.18)] backdrop-blur-xl transition hover:bg-orange-400/20"
       >
-        Explore Learning Journey
+        Explore Teaching System
       </button>
 
       {isOpen && (
-        <div className="absolute inset-0 z-50 flex items-center justify-center bg-black/75 p-10 backdrop-blur-md">
-          <div className="flex h-[82vh] w-[88vw] max-w-[1700px] overflow-hidden rounded-[2rem] border border-white/10 bg-[#080D1C]/95 shadow-[0_0_100px_rgba(0,0,0,0.8)]">
-            <div className="w-[440px] shrink-0 border-r border-white/10 p-8">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-8 backdrop-blur-md">
+          <div className="grid h-[84vh] w-[88vw] max-w-[1720px] grid-cols-[420px_1fr] overflow-hidden rounded-[2rem] border border-white/10 bg-[#080D1C]/96 shadow-[0_0_100px_rgba(0,0,0,0.85)]">
+            <aside className="border-r border-white/10 p-8">
               <div className="inline-flex items-center gap-3 rounded-full border border-orange-400/30 bg-orange-400/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.25em] text-orange-300">
                 RP Systems • Journey
               </div>
@@ -59,9 +60,9 @@ export default function LearningJourney() {
                   </button>
                 ))}
               </div>
-            </div>
+            </aside>
 
-            <div className="relative flex-1 overflow-y-auto p-10">
+            <main className="relative overflow-y-auto p-10">
               <button
                 onClick={() => setIsOpen(false)}
                 className="absolute right-8 top-8 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-slate-300 hover:bg-white/10"
@@ -81,12 +82,46 @@ export default function LearningJourney() {
                 {selectedStep.description}
               </p>
 
-              <div className="mt-12 grid grid-cols-3 gap-6">
+              <div className="mt-10 grid grid-cols-3 gap-6">
                 <InfoBlock title="Concepts" items={selectedStep.concepts} />
                 <InfoBlock title="Tools" items={selectedStep.tools} />
                 <InfoBlock title="Projects" items={selectedStep.projects} />
               </div>
-            </div>
+
+              <section className="mt-10">
+                <p className="text-sm font-bold uppercase tracking-[0.3em] text-orange-300">
+                  Teaching Missions
+                </p>
+
+                <div className="mt-5 grid grid-cols-3 gap-5">
+                  {teachingMissions.map((mission) => (
+                    <article
+                      key={mission.id}
+                      className="rounded-[1.5rem] border border-orange-400/20 bg-white/5 p-6"
+                    >
+                      <h4 className="text-2xl font-semibold leading-tight tracking-[-0.04em] text-white">
+                        {mission.title}
+                      </h4>
+
+                      <p className="mt-4 text-base leading-7 text-slate-300">
+                        {mission.description}
+                      </p>
+
+                      <div className="mt-5 flex flex-wrap gap-2">
+                        {mission.tools.slice(0, 4).map((tool) => (
+                          <span
+                            key={tool}
+                            className="rounded-full border border-orange-400/30 bg-orange-400/10 px-3 py-1 text-xs font-semibold text-orange-200"
+                          >
+                            {tool}
+                          </span>
+                        ))}
+                      </div>
+                    </article>
+                  ))}
+                </div>
+              </section>
+            </main>
           </div>
         </div>
       )}
@@ -94,13 +129,7 @@ export default function LearningJourney() {
   );
 }
 
-function InfoBlock({
-  title,
-  items,
-}: {
-  title: string;
-  items: string[];
-}) {
+function InfoBlock({ title, items }: { title: string; items: string[] }) {
   return (
     <div className="min-h-[180px] rounded-[1.5rem] border border-white/10 bg-white/5 p-6">
       <p className="text-sm font-bold uppercase tracking-[0.25em] text-slate-400">

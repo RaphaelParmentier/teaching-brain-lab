@@ -48,3 +48,16 @@ body {
 .react-flow__node:hover {
   filter: drop-shadow(0 0 18px rgba(56, 189, 248, 0.6));
 }
+
+.react-flow__handle {
+  opacity: 0;
+  width: 0;
+  height: 0;
+  border: none;
+  background: transparent;
+  pointer-events: none;
+}
+
+.react-flow__node {
+  overflow: visible;
+}
