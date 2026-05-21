@@ -1,5 +1,8 @@
 "use client";
 
+import { useState } from "react";
+import BrainPanel from "@/components/brain/BrainPanel";
+import type { BrainNodeData } from "@/data/brain-nodes";
 import React, { useMemo } from "react";
 import ReactFlow, {
   Background,
@@ -22,6 +25,7 @@ const categoryLabels: Record<string, string> = {
 };
 
 export default function BrainCanvas() {
+  const [selectedNode, setSelectedNode] = useState<BrainNodeData | null>(null);
   const nodes: Node[] = useMemo(
     () =>
       brainNodes.map((node) => ({
@@ -130,6 +134,10 @@ export default function BrainCanvas() {
       </div>
 
       <ReactFlow
+        onNodeClick={(_, node) => {
+          const clickedNode = brainNodes.find((item) => item.id === node.id);
+          setSelectedNode(clickedNode ?? null);
+        }}
         nodes={nodes}
         edges={edges}
         fitView
@@ -141,6 +149,7 @@ export default function BrainCanvas() {
         <Background color="#334155" gap={28} />
         <Controls />
       </ReactFlow>
+      <BrainPanel selectedNode={selectedNode} />
     </section>
   );
 }
