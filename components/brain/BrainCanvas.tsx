@@ -107,9 +107,13 @@ export default function BrainCanvas() {
     },
   ].map((edge) => ({
     ...edge,
+    animated: true,
+    className: "neural-edge",
     style: {
-      stroke: "rgba(125, 211, 252, 0.65)",
-      strokeWidth: 2,
+      stroke: "rgba(125, 211, 252, 0.75)",
+      strokeWidth: 2.5,
+      strokeDasharray: "8 8",
+      filter: "drop-shadow(0 0 6px rgba(56, 189, 248, 0.75))",
     },
   }));
 

@@ -24,3 +24,27 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.react-flow__edge-path.neural-edge,
+.neural-edge .react-flow__edge-path {
+  stroke-dasharray: 8;
+  animation: neural-pulse 1.8s linear infinite;
+}
+
+@keyframes neural-pulse {
+  from {
+    stroke-dashoffset: 24;
+  }
+
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.react-flow__node {
+  transition: filter 200ms ease, transform 200ms ease;
+}
+
+.react-flow__node:hover {
+  filter: drop-shadow(0 0 18px rgba(56, 189, 248, 0.6));
+}
