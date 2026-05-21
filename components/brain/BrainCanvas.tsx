@@ -1,12 +1,7 @@
 "use client";
 
 import React, { useMemo, useState } from "react";
-import ReactFlow, {
-  Background,
-  Edge,
-  Node,
-  Position,
-} from "reactflow";
+import ReactFlow, { Background, Edge, Node, Position } from "reactflow";
 import "reactflow/dist/style.css";
 
 import { brainNodes } from "@/data/brain-nodes";
@@ -22,12 +17,12 @@ const categoryLabels: Record<string, string> = {
   domain: "Domain expertise",
 };
 
-const graphOffset = { x: 580, y: 110 };
-const graphScale = 1.75;
+const graphOffset = { x: 620, y: 135 };
+const graphScale = 1.9;
 
 export default function BrainCanvas() {
   const [selectedNode, setSelectedNode] = useState<BrainNodeData | null>(null);
-  const [mouse, setMouse] = useState({ x: 1100, y: 420 });
+  const [mouse, setMouse] = useState({ x: 1150, y: 420 });
 
   const nodes: Node[] = useMemo(
     () =>
@@ -41,29 +36,43 @@ export default function BrainCanvas() {
         targetPosition: Position.Left,
         data: {
           label: (
-            <div className="group min-w-[330px] rounded-[2rem] border border-white/10 bg-[#080D1C]/95 px-8 py-7 shadow-[0_0_60px_rgba(0,0,0,0.65)] backdrop-blur-xl transition duration-300 hover:scale-[1.035] hover:border-orange-300/50 hover:shadow-[0_0_75px_rgba(249,115,22,0.24)]">
+            <div
+              className="group min-w-[360px] rounded-[2rem] border bg-[#080D1C]/96 px-9 py-8 shadow-[0_0_65px_rgba(0,0,0,0.72)] backdrop-blur-xl transition duration-300 hover:scale-[1.035]"
+              style={{
+                borderColor: `${node.color}33`,
+                boxShadow: `0 0 55px rgba(0,0,0,0.72), 0 0 42px ${node.color}18`,
+              }}
+            >
               <div
-                className="mb-5 h-3 w-3 rounded-full"
+                className="mb-5 h-3.5 w-3.5 rounded-full"
                 style={{
                   backgroundColor: node.color,
-                  boxShadow: `0 0 26px ${node.color}`,
+                  boxShadow: `0 0 28px ${node.color}`,
                 }}
               />
 
-              <p className="text-sm font-semibold uppercase tracking-[0.38em] text-slate-400">
+              <p
+                className="text-sm font-bold uppercase tracking-[0.38em]"
+                style={{ color: `${node.color}` }}
+              >
                 {categoryLabels[node.category]}
               </p>
 
-              <p className="mt-4 text-[1.8rem] font-semibold leading-[1.02] tracking-[-0.05em] text-white">
+              <p className="mt-4 text-[2rem] font-semibold leading-[1.02] tracking-[-0.055em] text-white">
                 {node.label}
               </p>
 
               {node.skills && (
-                <div className="mt-5 flex flex-wrap gap-2">
+                <div className="mt-6 flex flex-wrap gap-2.5">
                   {node.skills.slice(0, 3).map((skill) => (
                     <span
                       key={skill}
-                      className="rounded-full border border-white/12 bg-white/8 px-3.5 py-1 text-xs font-medium text-slate-200"
+                      className="rounded-full border px-3.5 py-1.5 text-xs font-semibold"
+                      style={{
+                        borderColor: `${node.color}40`,
+                        backgroundColor: `${node.color}18`,
+                        color: node.color,
+                      }}
                     >
                       {skill}
                     </span>
@@ -114,29 +123,29 @@ export default function BrainCanvas() {
         className="pointer-events-none absolute inset-0 transition duration-300"
         style={{
           background: `
-            radial-gradient(620px circle at ${mouse.x}px ${mouse.y}px, rgba(249,115,22,0.30), transparent 44%),
-            radial-gradient(circle at 68% 42%, rgba(249,115,22,0.34), transparent 31%),
-            radial-gradient(circle at 72% 68%, rgba(124,45,18,0.24), transparent 37%),
-            radial-gradient(circle at 52% 52%, rgba(15,23,42,0.88), transparent 42%)
+            radial-gradient(560px circle at ${mouse.x}px ${mouse.y}px, rgba(249,115,22,0.26), transparent 44%),
+            radial-gradient(circle at 63% 43%, rgba(249,115,22,0.30), transparent 33%),
+            radial-gradient(circle at 72% 66%, rgba(124,45,18,0.22), transparent 38%),
+            radial-gradient(circle at 58% 52%, rgba(15,23,42,0.70), transparent 44%)
           `,
         }}
       />
 
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_65%_50%,transparent_0%,rgba(5,5,5,0.18)_42%,rgba(5,5,5,0.94)_90%)]" />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_65%_50%,transparent_0%,rgba(5,5,5,0.14)_44%,rgba(5,5,5,0.94)_92%)]" />
 
       <div className="pointer-events-none absolute inset-x-0 top-0 h-56 bg-gradient-to-b from-black/90 to-transparent" />
 
-      <div className="absolute left-12 top-10 z-10 max-w-[680px]">
+      <div className="absolute left-12 top-10 z-10 max-w-[560px]">
         <div className="inline-flex items-center gap-3 rounded-full border border-orange-400/30 bg-orange-400/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.3em] text-orange-300 shadow-[0_0_35px_rgba(249,115,22,0.18)]">
           <span className="h-2 w-2 rounded-full bg-orange-400 shadow-[0_0_18px_rgba(249,115,22,0.95)]" />
           RP Systems • Teaching
         </div>
 
-        <h1 className="mt-7 max-w-[640px] text-5xl font-semibold leading-[0.92] tracking-[-0.06em] text-white md:text-7xl">
+        <h1 className="mt-7 max-w-[520px] text-[4.6rem] font-semibold leading-[0.9] tracking-[-0.065em] text-white">
           Designing learning systems with data, AI and scientific rigor.
         </h1>
 
-        <p className="mt-7 max-w-[460px] text-base leading-7 text-slate-300 md:text-lg">
+        <p className="mt-7 max-w-[430px] text-base leading-7 text-slate-300">
           Interactive teaching architecture connecting statistical reasoning,
           analytics, AI systems, software engineering and research-oriented
           thinking.
@@ -147,9 +156,9 @@ export default function BrainCanvas() {
         nodes={nodes}
         edges={edges}
         fitView
-        fitViewOptions={{ padding: 0.08 }}
-        minZoom={0.34}
-        maxZoom={1.05}
+        fitViewOptions={{ padding: 0.06 }}
+        minZoom={0.31}
+        maxZoom={1}
         nodesDraggable={false}
         nodesConnectable={false}
         panOnDrag={false}
