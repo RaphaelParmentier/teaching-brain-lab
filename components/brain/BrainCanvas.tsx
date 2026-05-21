@@ -3,6 +3,8 @@
 import React, { useMemo, useState } from "react";
 import ReactFlow, { Background, Edge, Node, Position } from "reactflow";
 import "reactflow/dist/style.css";
+import { teachingMissions } from "@/data/teaching-missions";
+import TeachingMissionCard from "@/components/teaching/TeachingMissionCard";
 
 import { brainNodes } from "@/data/brain-nodes";
 import type { BrainNodeData } from "@/data/brain-nodes";
@@ -175,6 +177,11 @@ export default function BrainCanvas() {
       </ReactFlow>
 
       <BrainPanel selectedNode={selectedNode} />
+      <div className="absolute bottom-10 left-12 z-20 grid w-[760px] grid-cols-3 gap-4">
+        {teachingMissions.map((mission) => (
+          <TeachingMissionCard key={mission.id} mission={mission} />
+        ))}
+      </div>
     </section>
   );
 }

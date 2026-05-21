@@ -1,68 +1,43 @@
 export interface TeachingMission {
   id: string;
-
   title: string;
-
   description: string;
-
   objective: string;
-
   tools: string[];
 }
 
 export const teachingMissions: TeachingMission[] = [
   {
     id: "foodtech",
-
     title: "FoodTech Expansion",
-
     description:
-      "Students identify the most promising European city for market expansion.",
-
+      "Students identify the most promising European city for market expansion using heterogeneous public datasets.",
     objective:
-      "Transform raw data into a strategic recommendation.",
-
-    tools: [
-      "R",
-      "Data Cleaning",
-      "Visualization",
-      "Decision Making",
-    ],
+      "Transform messy data into a strategic recommendation supported by clear indicators and visualizations.",
+    tools: ["R", "Data Cleaning", "Visualization", "Decision Making"],
   },
-
   {
-    id: "health",
-
-    title: "Healthcare Analytics",
-
-    description:
-      "Detect anomalies and extract insights from health datasets.",
-
-    objective:
-      "Apply statistical reasoning to real-world health data.",
-
-    tools: [
-      "Statistics",
-      "R",
-      "Data Quality",
-    ],
-  },
-
+  id: "healthcare",
+  title: "Healthcare Analytics with Python",
+  description:
+    "Students explore healthcare datasets using Python and Jupyter notebooks to clean, analyze and communicate findings from real-world data.",
+  objective:
+    "Develop analytical thinking through reproducible workflows, exploratory analysis, visualization and critical interpretation of healthcare indicators.",
+  tools: [
+    "Python",
+    "Jupyter Notebook",
+    "Pandas",
+    "Matplotlib",
+    "Healthcare Data",
+  ],
+},
   {
-    id: "ai",
-
+    id: "genai",
     title: "Generative AI Workshop",
-
     description:
-      "Design and evaluate AI assistants using modern LLM techniques.",
-
+      "Students design, test and critique AI-assisted workflows using modern LLM techniques.",
     objective:
-      "Understand practical AI workflows and limitations.",
-
-    tools: [
-      "LLM",
-      "Prompt Engineering",
-      "Evaluation",
-    ],
+      "Understand practical AI use cases, limitations, hallucination risks and evaluation principles.",
+    tools: ["LLMs", "Prompt Engineering", "RAG", "Evaluation"],
   },
 ];
