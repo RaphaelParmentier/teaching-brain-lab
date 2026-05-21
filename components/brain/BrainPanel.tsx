@@ -51,6 +51,26 @@ export default function BrainPanel({ selectedNode }: BrainPanelProps) {
         </div>
       )}
 
+      {selectedNode.missions && (
+        <div className="mt-6">
+            <p className="text-xs uppercase tracking-[0.25em] text-slate-400">
+            Teaching Missions
+            </p>
+
+            <ul className="mt-3 space-y-2 text-sm text-slate-300">
+            {selectedNode.missions.map((mission) => (
+                <li
+                key={mission}
+                className="flex items-start gap-2"
+                >
+                <span className="mt-1 text-cyan-300">●</span>
+                <span>{mission}</span>
+                </li>
+            ))}
+            </ul>
+        </div>
+        )}
+
       {selectedNode.courses && (
         <div className="mt-5">
           <p className="text-xs uppercase tracking-[0.25em] text-slate-400">
@@ -63,6 +83,26 @@ export default function BrainPanel({ selectedNode }: BrainPanelProps) {
           </ul>
         </div>
       )}
+
+      {selectedNode.topics && (
+        <div className="mt-6">
+            <p className="text-xs uppercase tracking-[0.25em] text-slate-400">
+            Related Topics
+            </p>
+
+            <div className="mt-3 flex flex-wrap gap-2">
+            {selectedNode.topics.map((topic) => (
+                <span
+                key={topic}
+                className="rounded-full border border-cyan-500/20 bg-cyan-500/10 px-3 py-1 text-xs text-cyan-200"
+                >
+                {topic}
+                </span>
+            ))}
+            </div>
+        </div>
+        )}
+
     </aside>
   );
 }
