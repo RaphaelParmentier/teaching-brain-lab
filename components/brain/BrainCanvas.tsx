@@ -134,23 +134,29 @@ export default function BrainCanvas() {
   }));
 
   return (
-    <section className="relative h-screen w-full overflow-hidden">
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(56,189,248,0.18),transparent_45%)]" />
+    <section className="relative h-screen w-full overflow-hidden bg-[#05060A] text-white">
+      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.035)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.035)_1px,transparent_1px)] bg-[size:48px_48px]" />
+
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_45%,rgba(56,189,248,0.18),transparent_34%),radial-gradient(circle_at_80%_20%,rgba(249,115,22,0.10),transparent_30%)]" />
+
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-black/70 to-transparent" />
 
       <div className="absolute left-8 top-8 z-10 max-w-xl">
-        <p className="text-sm uppercase tracking-[0.4em] text-cyan-300">
-          Teaching Brain
-        </p>
+        <div className="absolute left-8 top-8 z-10 max-w-2xl">
+          <div className="inline-flex items-center gap-3 rounded-full border border-orange-400/20 bg-orange-400/10 px-4 py-2 text-xs font-medium uppercase tracking-[0.28em] text-orange-300 shadow-[0_0_30px_rgba(249,115,22,0.12)]">
+            <span className="h-2 w-2 rounded-full bg-orange-400 shadow-[0_0_16px_rgba(249,115,22,0.9)]" />
+            RP Systems • Teaching
+          </div>
 
-        <h1 className="mt-4 text-4xl font-bold tracking-tight md:text-6xl">
-          How I connect knowledge, data and AI.
-        </h1>
+          <h1 className="mt-6 max-w-2xl text-4xl font-semibold tracking-[-0.04em] text-white md:text-6xl">
+            Designing learning systems with data, AI and scientific rigor.
+          </h1>
 
-        <p className="mt-5 max-w-lg text-base leading-7 text-slate-300">
-          An interactive map of my teaching approach: statistics, data science,
-          healthcare, development and generative AI connected as one learning
-          system.
-        </p>
+          <p className="mt-6 max-w-xl text-base leading-7 text-slate-300 md:text-lg">
+            An interactive teaching architecture connecting statistical reasoning,
+            analytics, AI systems, software engineering and research-oriented thinking.
+          </p>
+        </div>
       </div>
 
       <ReactFlow
