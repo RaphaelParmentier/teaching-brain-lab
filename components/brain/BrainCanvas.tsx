@@ -35,15 +35,31 @@ export default function BrainCanvas() {
         targetPosition: Position.Left,
         data: {
           label: (
-            <div className="group min-w-[170px] rounded-2xl border border-white/10 bg-slate-900/90 p-4 shadow-2xl backdrop-blur transition hover:scale-105 hover:border-cyan-300/60">
+            <div className="group min-w-[220px] rounded-2xl border border-white/10 bg-slate-900/90 p-4 shadow-2xl backdrop-blur transition hover:scale-105 hover:border-cyan-300/60">
               <div
                 className="mb-3 h-2 w-2 rounded-full shadow-lg"
                 style={{ backgroundColor: node.color }}
               />
-              <p className="text-sm font-semibold text-white">{node.label}</p>
-              <p className="mt-1 text-xs text-slate-400">
+              <p className="text-xs uppercase tracking-[0.22em] text-slate-400">
                 {categoryLabels[node.category]}
               </p>
+
+              <p className="mt-2 text-base font-semibold leading-tight text-white">
+                {node.label}
+              </p>
+
+              {node.skills && (
+                <div className="mt-3 flex flex-wrap justify-center gap-1.5">
+                  {node.skills.slice(0, 3).map((skill) => (
+                    <span
+                      key={skill}
+                      className="rounded-full border border-white/10 bg-white/5 px-2 py-0.5 text-[10px] text-slate-300"
+                    >
+                      {skill}
+                    </span>
+                  ))}
+                </div>
+              )}
             </div>
           ),
         },
