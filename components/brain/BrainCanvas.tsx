@@ -5,6 +5,7 @@ import ReactFlow, { Background, Edge, Node, Position } from "reactflow";
 import "reactflow/dist/style.css";
 import { teachingMissions } from "@/data/teaching-missions";
 import TeachingMissionCard from "@/components/teaching/TeachingMissionCard";
+import LearningJourney from "@/components/journey/LearningJourney";
 
 import { brainNodes } from "@/data/brain-nodes";
 import type { BrainNodeData } from "@/data/brain-nodes";
@@ -181,6 +182,7 @@ export default function BrainCanvas() {
         {teachingMissions.map((mission) => (
           <TeachingMissionCard key={mission.id} mission={mission} />
         ))}
+        <LearningJourney />
       </div>
     </section>
   );
