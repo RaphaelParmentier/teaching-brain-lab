@@ -165,7 +165,7 @@ export default function BrainCanvas() {
       </div>
 
       <div className="absolute right-10 top-10 z-30">
-        <LearningJourney />
+        <LearningJourney onOpen={() => setSelectedNode(null)} />
       </div>
 
       <div className="absolute inset-0 z-10">

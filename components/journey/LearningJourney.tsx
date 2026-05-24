@@ -3,26 +3,37 @@
 import { useMemo, useState } from "react";
 
 import { learningPhilosophy } from "../../data/learning-philosophy";
-import { teachingPrograms } from "../../data/teaching-programs";
 import { teachingMissions } from "../../data/teaching-missions";
-import { missionPreviews } from "../../data/mission-previews";
+import { teachingPrograms } from "../../data/teaching-programs";
+import MissionOutputModal from "./MissionOutputModal";
 
-export default function LearningJourney() {
+type LearningJourneyProps = {
+  onOpen?: () => void;
+};
+
+export default function LearningJourney({ onOpen }: LearningJourneyProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedProgram, setSelectedProgram] = useState(teachingPrograms[0]);
+  const [selectedMission, setSelectedMission] = useState<any | null>(null);
 
   const relatedMissions = useMemo(
     () =>
       teachingMissions.filter((mission) =>
-        selectedProgram.missionIds.includes(mission.id)
+        selectedProgram.missionIds.includes(mission.id),
       ),
-    [selectedProgram]
+    [selectedProgram],
   );
+
+  const handleOpen = () => {
+    onOpen?.();
+    setIsOpen(true);
+  };
 
   return (
     <>
       <button
-        onClick={() => setIsOpen(true)}
+        type="button"
+        onClick={handleOpen}
         className="rounded-full border border-orange-400/30 bg-orange-400/10 px-6 py-3 text-sm font-semibold uppercase tracking-[0.22em] text-orange-200 shadow-[0_0_35px_rgba(249,115,22,0.18)] backdrop-blur-xl transition hover:bg-orange-400/20"
       >
         Explore Teaching System
@@ -49,6 +60,7 @@ export default function LearningJourney() {
                 {teachingPrograms.map((program, index) => (
                   <button
                     key={program.id}
+                    type="button"
                     onClick={() => setSelectedProgram(program)}
                     className={`flex w-full items-start gap-4 rounded-2xl border px-4 py-4 text-left transition ${
                       selectedProgram.id === program.id
@@ -75,6 +87,7 @@ export default function LearningJourney() {
 
             <main className="relative overflow-y-auto p-10">
               <button
+                type="button"
                 onClick={() => setIsOpen(false)}
                 className="absolute right-8 top-8 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-slate-300 hover:bg-white/10"
               >
@@ -162,25 +175,30 @@ export default function LearningJourney() {
 
                 <div className="mt-6 grid grid-cols-2 gap-5">
                   {relatedMissions.map((mission) => (
-                    <MissionPreview key={mission.id} mission={mission} />
+                    <MissionPreview
+                      key={mission.id}
+                      mission={mission}
+                      onOpenOutputs={() => setSelectedMission(mission)}
+                    />
                   ))}
                 </div>
               </section>
             </main>
           </div>
+
+          {selectedMission && (
+            <MissionOutputModal
+              mission={selectedMission}
+              onClose={() => setSelectedMission(null)}
+            />
+          )}
         </div>
       )}
     </>
   );
 }
 
-function ProgramBlock({
-  title,
-  value,
-}: {
-  title: string;
-  value: string;
-}) {
+function ProgramBlock({ title, value }: { title: string; value: string }) {
   return (
     <div className="rounded-[1.5rem] border border-white/10 bg-white/5 p-5">
       <p className="text-xs font-bold uppercase tracking-[0.25em] text-slate-400">
@@ -192,13 +210,7 @@ function ProgramBlock({
   );
 }
 
-function InfoBlock({
-  title,
-  items,
-}: {
-  title: string;
-  items: string[];
-}) {
+function InfoBlock({ title, items }: { title: string; items: string[] }) {
   return (
     <div className="min-h-[180px] rounded-[1.5rem] border border-white/10 bg-white/5 p-6">
       <p className="text-sm font-bold uppercase tracking-[0.25em] text-slate-400">
@@ -219,11 +231,13 @@ function InfoBlock({
   );
 }
 
-function MissionPreview({ mission }: { mission: any }) {
-  const previews = missionPreviews.filter(
-    (preview) => preview.missionId === mission.id
-  );
-
+function MissionPreview({
+  mission,
+  onOpenOutputs,
+}: {
+  mission: any;
+  onOpenOutputs: () => void;
+}) {
   return (
     <article className="rounded-[1.75rem] border border-orange-400/15 bg-white/[0.04] p-7 backdrop-blur-xl transition-all duration-300 hover:border-orange-400/35 hover:bg-white/[0.06]">
       <div className="flex items-center justify-between gap-4">
@@ -262,7 +276,10 @@ function MissionPreview({ mission }: { mission: any }) {
 
         <ul className="mt-4 space-y-2">
           {mission.deliverables.slice(0, 4).map((item: string) => (
-            <li key={item} className="flex items-center gap-3 text-sm text-slate-300">
+            <li
+              key={item}
+              className="flex items-center gap-3 text-sm text-slate-300"
+            >
               <span className="h-2 w-2 rounded-full bg-orange-400" />
               {item}
             </li>
@@ -270,75 +287,13 @@ function MissionPreview({ mission }: { mission: any }) {
         </ul>
       </div>
 
-      {previews.length > 0 && (
-        <div className="mt-7 rounded-2xl border border-white/10 bg-black/25 p-4">
-          <p className="text-xs font-bold uppercase tracking-[0.24em] text-cyan-200">
-            Real student output preview
-          </p>
-
-          <div className="mt-4 space-y-4">
-            {previews.map((preview) => (
-              <section
-                key={`${preview.missionId}-${preview.title}`}
-                className="rounded-xl border border-white/10 bg-slate-950/70 p-4"
-              >
-                <div className="flex items-center justify-between gap-3">
-                  <div>
-                    <p className="text-[0.65rem] font-bold uppercase tracking-[0.2em] text-orange-300">
-                      {preview.format}
-                    </p>
-                    <h5 className="mt-1 text-sm font-semibold text-white">
-                      {preview.title}
-                    </h5>
-                  </div>
-                </div>
-
-                <p className="mt-2 text-xs leading-5 text-slate-400">
-                  {preview.subtitle}
-                </p>
-
-                {preview.code && (
-                  <pre className="mt-3 max-h-48 overflow-auto rounded-xl border border-white/10 bg-black/50 p-3 text-[0.68rem] leading-5 text-slate-200">
-                    <code>{preview.code}</code>
-                  </pre>
-                )}
-
-                {preview.table && (
-                  <div className="mt-3 overflow-x-auto">
-                    <table className="w-full text-left text-[0.68rem]">
-                      <thead className="text-slate-400">
-                        <tr>
-                          {preview.table.headers.map((header) => (
-                            <th key={header} className="border-b border-white/10 py-2">
-                              {header}
-                            </th>
-                          ))}
-                        </tr>
-                      </thead>
-
-                      <tbody>
-                        {preview.table.rows.map((row) => (
-                          <tr key={row.join("-")} className="text-slate-200">
-                            {row.map((cell) => (
-                              <td key={cell} className="border-b border-white/5 py-2">
-                                {cell}
-                              </td>
-                            ))}
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                  </div>
-                )}
-
-                <p className="mt-3 text-xs leading-5 text-slate-300">
-                  {preview.insight}
-                </p>
-              </section>
-            ))}
-          </div>
-        </div>
-      )}
+      <button
+        type="button"
+        onClick={onOpenOutputs}
+        className="mt-6 rounded-full border border-orange-400/30 bg-orange-400/10 px-5 py-2 text-sm font-semibold text-orange-200 transition hover:border-orange-300 hover:bg-orange-400/20"
+      >
+        View student outputs
+      </button>
     </article>
   );
 }
