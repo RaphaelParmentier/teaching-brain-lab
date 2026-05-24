@@ -7,26 +7,47 @@ import type { BrainNodeData } from "@/data/brain-nodes";
 import BrainPanel from "@/components/brain/BrainPanel";
 import LearningJourney from "@/components/journey/LearningJourney";
 
-const nodePositions: Record<string, { x: number; y: number }> = {
-  core: { x: 49, y: 42 },
-  "data-strategy": { x: 28, y: 24 },
-  "statistical-reasoning": { x: 28, y: 58 },
-  "ml-strategy": { x: 67, y: 24 },
-  "ai-workflows": { x: 67, y: 58 },
-  communication: { x: 49, y: 78 },
+type Position = { x: number; y: number };
+
+const nodePositions: Record<string, Position> = {
+  core: { x: 47, y: 44 },
+  "data-strategy": { x: 28, y: 50 },
+  "statistical-reasoning": { x: 37, y: 27 },
+  "ml-strategy": { x: 59, y: 25 },
+  "ai-workflows": { x: 70, y: 48 },
+  communication: { x: 54, y: 72 },
 };
 
+const microNodes = [
+  { id: "kpi", x: 23, y: 36, color: "#22C55E" },
+  { id: "cleaning", x: 31, y: 63, color: "#22C55E" },
+  { id: "eda", x: 39, y: 48, color: "#22C55E" },
+  { id: "bias", x: 33, y: 22, color: "#38BDF8" },
+  { id: "inference", x: 44, y: 31, color: "#38BDF8" },
+  { id: "validation", x: 53, y: 34, color: "#A78BFA" },
+  { id: "features", x: 63, y: 34, color: "#A78BFA" },
+  { id: "llm", x: 74, y: 36, color: "#2DD4BF" },
+  { id: "rag", x: 77, y: 58, color: "#2DD4BF" },
+  { id: "reporting", x: 46, y: 67, color: "#F59E0B" },
+  { id: "storytelling", x: 60, y: 64, color: "#F59E0B" },
+  { id: "decision", x: 51, y: 56, color: "#F97316" },
+];
+
 const edges = [
-  { id: "core-data-strategy", from: "core", to: "data-strategy" },
-  { id: "core-statistical-reasoning", from: "core", to: "statistical-reasoning" },
-  { id: "core-ml-strategy", from: "core", to: "ml-strategy" },
-  { id: "core-ai-workflows", from: "core", to: "ai-workflows" },
-  { id: "core-communication", from: "core", to: "communication" },
-  { id: "data-statistics", from: "data-strategy", to: "statistical-reasoning" },
-  { id: "statistics-ml", from: "statistical-reasoning", to: "ml-strategy" },
-  { id: "ml-ai", from: "ml-strategy", to: "ai-workflows" },
-  { id: "communication-data", from: "communication", to: "data-strategy" },
-  { id: "communication-ai", from: "communication", to: "ai-workflows" },
+  { id: "core-data-strategy", from: "core", to: "data-strategy", type: "core" },
+  { id: "core-statistical-reasoning", from: "core", to: "statistical-reasoning", type: "core" },
+  { id: "core-ml-strategy", from: "core", to: "ml-strategy", type: "core" },
+  { id: "core-ai-workflows", from: "core", to: "ai-workflows", type: "core" },
+  { id: "core-communication", from: "core", to: "communication", type: "core" },
+
+  { id: "data-statistics", from: "data-strategy", to: "statistical-reasoning", type: "pedagogy" },
+  { id: "statistics-ml", from: "statistical-reasoning", to: "ml-strategy", type: "pedagogy" },
+  { id: "ml-ai", from: "ml-strategy", to: "ai-workflows", type: "pedagogy" },
+
+  { id: "communication-data", from: "communication", to: "data-strategy", type: "communication" },
+  { id: "communication-statistics", from: "communication", to: "statistical-reasoning", type: "communication" },
+  { id: "communication-ml", from: "communication", to: "ml-strategy", type: "communication" },
+  { id: "communication-ai", from: "communication", to: "ai-workflows", type: "communication" },
 ];
 
 const routes: Record<string, string[]> = {
@@ -37,40 +58,47 @@ const routes: Record<string, string[]> = {
     "core-ai-workflows",
     "core-communication",
   ],
-  "data-strategy": [
-    "core-data-strategy",
-    "data-statistics",
-    "communication-data",
-  ],
+  "data-strategy": ["core-data-strategy", "data-statistics", "communication-data"],
   "statistical-reasoning": [
     "core-statistical-reasoning",
     "data-statistics",
     "statistics-ml",
+    "communication-statistics",
   ],
   "ml-strategy": [
     "core-ml-strategy",
     "statistics-ml",
     "ml-ai",
+    "communication-ml",
   ],
-  "ai-workflows": [
-    "core-ai-workflows",
-    "ml-ai",
-    "communication-ai",
-  ],
+  "ai-workflows": ["core-ai-workflows", "ml-ai", "communication-ai"],
   communication: [
     "core-communication",
     "communication-data",
+    "communication-statistics",
+    "communication-ml",
     "communication-ai",
   ],
 };
 
-function getCurve(from: { x: number; y: number }, to: { x: number; y: number }) {
-  const midX = (from.x + to.x) / 2;
-  const bend = Math.abs(from.y - to.y) > 25 ? 8 : 4;
+const activeMicroNodes: Record<string, string[]> = {
+  core: ["decision", "eda", "validation", "storytelling"],
+  "data-strategy": ["kpi", "cleaning", "eda", "decision"],
+  "statistical-reasoning": ["bias", "inference", "decision"],
+  "ml-strategy": ["features", "validation", "inference"],
+  "ai-workflows": ["llm", "rag", "decision"],
+  communication: ["reporting", "storytelling", "decision"],
+};
 
-  return `M ${from.x} ${from.y} C ${midX} ${from.y - bend}, ${midX} ${
-    to.y + bend
-  }, ${to.x} ${to.y}`;
+function getCurve(from: Position, to: Position) {
+  const midX = (from.x + to.x) / 2;
+  const midY = (from.y + to.y) / 2;
+  const verticalBend = Math.abs(from.y - to.y) > 22 ? 7 : 4;
+  const horizontalBend = from.x < to.x ? 3 : -3;
+
+  return `M ${from.x} ${from.y} C ${midX + horizontalBend} ${
+    from.y - verticalBend
+  }, ${midX - horizontalBend} ${to.y + verticalBend}, ${to.x} ${to.y}`;
 }
 
 export default function BrainCanvas() {
@@ -81,6 +109,7 @@ export default function BrainCanvas() {
 
   const activeNodeId = selectedNode?.id ?? "core";
   const activeRouteIds = routes[activeNodeId] ?? [];
+  const activeMicroIds = activeMicroNodes[activeNodeId] ?? [];
 
   return (
     <section
@@ -103,8 +132,8 @@ export default function BrainCanvas() {
         style={{
           background: `
             radial-gradient(460px circle at ${mouse.x}px ${mouse.y}px, rgba(249,115,22,0.09), transparent 62%),
-            radial-gradient(680px circle at 49% 48%, rgba(14,165,233,0.08), transparent 58%),
-            radial-gradient(760px circle at 52% 52%, rgba(249,115,22,0.06), transparent 62%)
+            radial-gradient(720px circle at 50% 48%, rgba(14,165,233,0.07), transparent 58%),
+            radial-gradient(820px circle at 48% 52%, rgba(249,115,22,0.055), transparent 64%)
           `,
         }}
       />
@@ -122,9 +151,8 @@ export default function BrainCanvas() {
         </h1>
 
         <p className="mt-7 max-w-[430px] text-base leading-7 text-slate-300">
-          Interactive teaching architecture connecting statistical reasoning,
-          analytics, AI systems, software engineering and research-oriented
-          thinking.
+          Interactive teaching architecture built around learning by doing,
+          evidence-based thinking and professional data workflows.
         </p>
       </div>
 
@@ -133,8 +161,8 @@ export default function BrainCanvas() {
       </div>
 
       <div className="absolute inset-0 z-10">
-        <div className="pointer-events-none absolute left-[49%] top-[48%] h-[52vh] w-[38vw] -translate-x-1/2 -translate-y-1/2 rounded-full bg-orange-500/5 blur-3xl" />
-        <div className="pointer-events-none absolute left-[49%] top-[48%] h-[38vh] w-[28vw] -translate-x-1/2 -translate-y-1/2 rounded-full bg-sky-400/5 blur-3xl" />
+        <div className="pointer-events-none absolute left-[50%] top-[48%] h-[58vh] w-[42vw] -translate-x-1/2 -translate-y-1/2 rounded-[45%_55%_52%_48%] border border-white/5 bg-orange-500/5 blur-[1px]" />
+        <div className="pointer-events-none absolute left-[50%] top-[48%] h-[42vh] w-[32vw] -translate-x-1/2 -translate-y-1/2 rounded-full bg-sky-400/5 blur-3xl" />
 
         <svg
           className="absolute inset-0 h-full w-full"
@@ -154,14 +182,14 @@ export default function BrainCanvas() {
                   fill="none"
                   stroke={
                     isActive
-                      ? "rgba(125, 211, 252, 0.25)"
-                      : "rgba(125, 211, 252, 0.08)"
+                      ? "rgba(125, 211, 252, 0.22)"
+                      : "rgba(125, 211, 252, 0.07)"
                   }
-                  strokeWidth={isActive ? 0.62 : 0.22}
+                  strokeWidth={isActive ? 0.72 : 0.2}
                   strokeLinecap="round"
                   style={{
                     filter: isActive
-                      ? "drop-shadow(0 0 10px rgba(56,189,248,0.65))"
+                      ? "drop-shadow(0 0 12px rgba(56,189,248,0.7))"
                       : "none",
                   }}
                 />
@@ -172,23 +200,49 @@ export default function BrainCanvas() {
                   fill="none"
                   stroke={
                     isActive
-                      ? "rgba(125, 211, 252, 0.95)"
-                      : "rgba(125, 211, 252, 0.15)"
+                      ? "rgba(186,230,253,0.95)"
+                      : "rgba(125, 211, 252, 0.13)"
                   }
-                  strokeWidth={isActive ? 0.2 : 0.09}
+                  strokeWidth={isActive ? 0.22 : 0.08}
                   strokeDasharray="0.8 1.35"
                   strokeLinecap="round"
                 />
 
                 {isActive && (
                   <circle r="0.42" fill="rgba(186,230,253,0.95)">
-                    <animateMotion dur="2.2s" repeatCount="indefinite" path={path} />
+                    <animateMotion
+                      dur="2.15s"
+                      repeatCount="indefinite"
+                      path={path}
+                    />
                   </circle>
                 )}
               </g>
             );
           })}
         </svg>
+
+        {microNodes.map((micro) => {
+          const isActive = activeMicroIds.includes(micro.id);
+
+          return (
+            <span
+              key={micro.id}
+              className="pointer-events-none absolute -translate-x-1/2 -translate-y-1/2 rounded-full transition duration-500"
+              style={{
+                left: `${micro.x}%`,
+                top: `${micro.y}%`,
+                width: isActive ? 9 : 5,
+                height: isActive ? 9 : 5,
+                backgroundColor: micro.color,
+                opacity: isActive ? 0.95 : 0.28,
+                boxShadow: isActive
+                  ? `0 0 24px ${micro.color}, 0 0 54px ${micro.color}55`
+                  : `0 0 12px ${micro.color}55`,
+              }}
+            />
+          );
+        })}
 
         {brainNodes.map((node) => (
           <NeuralNode
@@ -215,13 +269,13 @@ function NeuralNode({
   onClick,
 }: {
   node: BrainNodeData;
-  position: { x: number; y: number };
+  position: Position;
   isActive: boolean;
   isCore: boolean;
   onClick: () => void;
 }) {
   const size = isCore ? "h-24 w-24" : "h-16 w-16";
-  const haloSize = isCore ? "h-44 w-44" : "h-28 w-28";
+  const haloSize = isCore ? "h-48 w-48" : "h-30 w-30";
   const dotSize = isCore ? "h-5 w-5" : "h-4 w-4";
 
   return (
@@ -239,7 +293,7 @@ function NeuralNode({
         className={`absolute top-0 rounded-full blur-3xl transition duration-500 ${haloSize}`}
         style={{
           backgroundColor: node.color,
-          opacity: isActive ? 0.58 : 0.18,
+          opacity: isActive ? 0.6 : 0.17,
         }}
       />
 
@@ -247,9 +301,9 @@ function NeuralNode({
         className={`relative flex items-center justify-center rounded-full border transition duration-500 ${size}`}
         style={{
           borderColor: isActive ? `${node.color}CC` : `${node.color}55`,
-          background: `radial-gradient(circle at 35% 30%, ${node.color}35, rgba(8,13,28,0.92) 58%)`,
+          background: `radial-gradient(circle at 35% 30%, ${node.color}38, rgba(8,13,28,0.94) 58%)`,
           boxShadow: isActive
-            ? `0 0 48px ${node.color}AA, inset 0 0 28px ${node.color}35`
+            ? `0 0 52px ${node.color}AA, inset 0 0 30px ${node.color}35`
             : `0 0 20px ${node.color}55, inset 0 0 18px ${node.color}20`,
         }}
       >
@@ -261,8 +315,13 @@ function NeuralNode({
           }}
         />
 
+        <span
+          className="absolute inset-[-10px] rounded-full border opacity-60"
+          style={{ borderColor: `${node.color}33` }}
+        />
+
         {isCore && (
-          <span className="absolute inset-[-10px] rounded-full border border-orange-300/20" />
+          <span className="absolute inset-[-18px] rounded-full border border-orange-300/15" />
         )}
       </span>
 
