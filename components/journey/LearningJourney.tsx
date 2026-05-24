@@ -1,12 +1,22 @@
 "use client";
 
-import { useState } from "react";
-import { learningPath } from "@/data/learning-path";
+import { useMemo, useState } from "react";
+
+import { learningPhilosophy } from "@/data/learning-philosophy";
+import { teachingPrograms } from "@/data/teaching-programs";
 import { teachingMissions } from "@/data/teaching-missions";
 
 export default function LearningJourney() {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedStep, setSelectedStep] = useState(learningPath[0]);
+  const [selectedProgram, setSelectedProgram] = useState(teachingPrograms[0]);
+
+  const relatedMissions = useMemo(
+    () =>
+      teachingMissions.filter((mission) =>
+        selectedProgram.missionIds.includes(mission.id)
+      ),
+    [selectedProgram]
+  );
 
   return (
     <>
@@ -19,28 +29,28 @@ export default function LearningJourney() {
 
       {isOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-8 backdrop-blur-md">
-          <div className="grid h-[84vh] w-[88vw] max-w-[1720px] grid-cols-[420px_1fr] overflow-hidden rounded-[2rem] border border-white/10 bg-[#080D1C]/96 shadow-[0_0_100px_rgba(0,0,0,0.85)]">
+          <div className="grid h-[86vh] w-[90vw] max-w-[1780px] grid-cols-[430px_1fr] overflow-hidden rounded-[2rem] border border-white/10 bg-[#080D1C]/96 shadow-[0_0_100px_rgba(0,0,0,0.85)]">
             <aside className="border-r border-white/10 p-8">
               <div className="inline-flex items-center gap-3 rounded-full border border-orange-400/30 bg-orange-400/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.25em] text-orange-300">
-                RP Systems • Journey
+                RP Systems • Teaching
               </div>
 
               <h2 className="mt-6 text-4xl font-semibold leading-[0.98] tracking-[-0.055em] text-white">
-                From data literacy to applied AI systems.
+                Applied Data & AI Education.
               </h2>
 
               <p className="mt-5 text-base leading-7 text-slate-300">
-                A structured progression designed to move learners from basic
-                analytical intuition to autonomous project delivery.
+                Teaching programs designed around realistic projects, rigorous
+                reasoning and professional deliverables.
               </p>
 
               <div className="mt-7 space-y-3">
-                {learningPath.map((step, index) => (
+                {teachingPrograms.map((program, index) => (
                   <button
-                    key={step.id}
-                    onClick={() => setSelectedStep(step)}
-                    className={`flex w-full items-center gap-4 rounded-2xl border px-4 py-4 text-left transition ${
-                      selectedStep.id === step.id
+                    key={program.id}
+                    onClick={() => setSelectedProgram(program)}
+                    className={`flex w-full items-start gap-4 rounded-2xl border px-4 py-4 text-left transition ${
+                      selectedProgram.id === program.id
                         ? "border-orange-400/45 bg-orange-400/12"
                         : "border-white/10 bg-white/5 hover:bg-white/10"
                     }`}
@@ -51,10 +61,10 @@ export default function LearningJourney() {
 
                     <div>
                       <p className="text-base font-semibold text-white">
-                        {step.title}
+                        {program.title}
                       </p>
-                      <p className="mt-1 text-xs uppercase tracking-[0.2em] text-slate-400">
-                        {step.level}
+                      <p className="mt-1 text-xs uppercase tracking-[0.18em] text-slate-400">
+                        {program.level}
                       </p>
                     </div>
                   </button>
@@ -71,58 +81,71 @@ export default function LearningJourney() {
               </button>
 
               <p className="text-sm font-bold uppercase tracking-[0.3em] text-orange-300">
-                {selectedStep.level}
+                Teaching Program
               </p>
 
               <h3 className="mt-4 max-w-4xl text-6xl font-semibold tracking-[-0.06em] text-white">
-                {selectedStep.title}
+                {selectedProgram.title}
               </h3>
 
-              <p className="mt-6 max-w-3xl text-xl leading-9 text-slate-300">
-                {selectedStep.description}
+              <p className="mt-5 max-w-3xl text-xl leading-9 text-slate-300">
+                {selectedProgram.tagline}
               </p>
 
-              <div className="mt-10 rounded-[1.5rem] border border-cyan-400/20 bg-cyan-400/10 p-6">
-                <p className="text-sm font-bold uppercase tracking-[0.3em] text-cyan-200">
-                  Active Learning Route
-                </p>
-
-                <div className="mt-5 flex flex-wrap items-center gap-3">
-                  {learningPath.map((step, index) => {
-                    const isPastOrActive =
-                      learningPath.findIndex((item) => item.id === selectedStep.id) >= index;
-
-                    return (
-                      <div key={step.id} className="flex items-center gap-3">
-                        <span
-                          className={`rounded-full border px-4 py-2 text-sm font-semibold ${
-                            isPastOrActive
-                              ? "border-cyan-300/40 bg-cyan-300/15 text-cyan-100 shadow-[0_0_20px_rgba(56,189,248,0.18)]"
-                              : "border-white/10 bg-white/5 text-slate-500"
-                          }`}
-                        >
-                          {step.title}
-                        </span>
-
-                        {index < learningPath.length - 1 && (
-                          <span
-                            className={
-                              isPastOrActive ? "text-cyan-300" : "text-slate-700"
-                            }
-                          >
-                            →
-                          </span>
-                        )}
-                      </div>
-                    );
-                  })}
-                </div>
+              <div className="mt-8 grid grid-cols-3 gap-5">
+                <ProgramBlock title="Level" value={selectedProgram.level} />
+                <ProgramBlock title="Format" value={selectedProgram.format} />
+                <ProgramBlock
+                  title="Entry Profile"
+                  value={selectedProgram.entryProfile}
+                />
               </div>
 
+              <section className="mt-10 rounded-[1.75rem] border border-orange-400/15 bg-orange-400/10 p-7">
+                <p className="text-sm font-bold uppercase tracking-[0.3em] text-orange-300">
+                  Objective
+                </p>
+
+                <p className="mt-4 text-lg leading-8 text-slate-200">
+                  {selectedProgram.objective}
+                </p>
+
+                <p className="mt-5 text-sm font-bold uppercase tracking-[0.3em] text-slate-400">
+                  Expected Outcome
+                </p>
+
+                <p className="mt-3 text-base leading-7 text-slate-300">
+                  {selectedProgram.expectedOutcome}
+                </p>
+              </section>
+
+              <section className="mt-10">
+                <p className="text-sm font-bold uppercase tracking-[0.3em] text-cyan-200">
+                  Teaching Philosophy
+                </p>
+
+                <div className="mt-5 grid grid-cols-3 gap-5">
+                  {learningPhilosophy.map((item) => (
+                    <article
+                      key={item.title}
+                      className="rounded-[1.5rem] border border-cyan-400/15 bg-cyan-400/10 p-6"
+                    >
+                      <h4 className="text-xl font-semibold tracking-[-0.04em] text-white">
+                        {item.title}
+                      </h4>
+
+                      <p className="mt-4 text-sm leading-6 text-slate-300">
+                        {item.description}
+                      </p>
+                    </article>
+                  ))}
+                </div>
+              </section>
+
               <div className="mt-10 grid grid-cols-3 gap-6">
-                <InfoBlock title="Concepts" items={selectedStep.concepts} />
-                <InfoBlock title="Tools" items={selectedStep.tools} />
-                <InfoBlock title="Projects" items={selectedStep.projects} />
+                <InfoBlock title="Skills" items={selectedProgram.skills} />
+                <InfoBlock title="Concepts" items={selectedProgram.concepts} />
+                <InfoBlock title="Tools" items={selectedProgram.tools} />
               </div>
 
               <section className="mt-10">
@@ -130,34 +153,16 @@ export default function LearningJourney() {
                   Teaching Missions
                 </p>
 
-                <div className="mt-5 grid grid-cols-2 gap-5">
-                  {teachingMissions
-                    .filter((mission) => selectedStep.relatedMissionIds.includes(mission.id))
-                    .map((mission) => (
-                      <article
-                        key={mission.id}
-                        className="rounded-[1.5rem] border border-orange-400/20 bg-white/5 p-6"
-                      >
-                        <h4 className="text-2xl font-semibold leading-tight tracking-[-0.04em] text-white">
-                          {mission.title}
-                        </h4>
+                <p className="mt-3 max-w-3xl text-base leading-7 text-slate-400">
+                  Practical cases used to turn the program into concrete student
+                  work. Each mission is designed around real analytical
+                  workflows and professional deliverables.
+                </p>
 
-                        <p className="mt-4 text-base leading-7 text-slate-300">
-                          {mission.description}
-                        </p>
-
-                        <div className="mt-5 flex flex-wrap gap-2">
-                          {mission.tools.slice(0, 4).map((tool) => (
-                            <span
-                              key={tool}
-                              className="rounded-full border border-orange-400/30 bg-orange-400/10 px-3 py-1 text-xs font-semibold text-orange-200"
-                            >
-                              {tool}
-                            </span>
-                          ))}
-                        </div>
-                      </article>
-                    ))}
+                <div className="mt-6 grid grid-cols-2 gap-5">
+                  {relatedMissions.map((mission) => (
+                    <MissionPreview key={mission.id} mission={mission} />
+                  ))}
                 </div>
               </section>
             </main>
@@ -168,7 +173,31 @@ export default function LearningJourney() {
   );
 }
 
-function InfoBlock({ title, items }: { title: string; items: string[] }) {
+function ProgramBlock({
+  title,
+  value,
+}: {
+  title: string;
+  value: string;
+}) {
+  return (
+    <div className="rounded-[1.5rem] border border-white/10 bg-white/5 p-5">
+      <p className="text-xs font-bold uppercase tracking-[0.25em] text-slate-400">
+        {title}
+      </p>
+
+      <p className="mt-3 text-base leading-7 text-slate-200">{value}</p>
+    </div>
+  );
+}
+
+function InfoBlock({
+  title,
+  items,
+}: {
+  title: string;
+  items: string[];
+}) {
   return (
     <div className="min-h-[180px] rounded-[1.5rem] border border-white/10 bg-white/5 p-6">
       <p className="text-sm font-bold uppercase tracking-[0.25em] text-slate-400">
@@ -186,5 +215,55 @@ function InfoBlock({ title, items }: { title: string; items: string[] }) {
         ))}
       </div>
     </div>
+  );
+}
+
+function MissionPreview({ mission }: { mission: any }) {
+  return (
+    <article className="rounded-[1.75rem] border border-orange-400/15 bg-white/[0.04] p-7 backdrop-blur-xl transition-all duration-300 hover:border-orange-400/35 hover:bg-white/[0.06]">
+      <div className="flex items-center justify-between gap-4">
+        <span className="rounded-full border border-orange-400/20 bg-orange-400/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.22em] text-orange-200">
+          {mission.category}
+        </span>
+
+        <span className="text-xs uppercase tracking-[0.2em] text-slate-400">
+          {mission.level}
+        </span>
+      </div>
+
+      <h4 className="mt-5 text-3xl font-semibold tracking-[-0.05em] text-white">
+        {mission.title}
+      </h4>
+
+      <p className="mt-5 text-base leading-7 text-slate-300">
+        {mission.objective}
+      </p>
+
+      <div className="mt-6 flex flex-wrap gap-2">
+        {mission.skills.slice(0, 4).map((skill: string) => (
+          <span
+            key={skill}
+            className="rounded-full border border-cyan-400/20 bg-cyan-400/10 px-3 py-1 text-sm font-medium text-cyan-200"
+          >
+            {skill}
+          </span>
+        ))}
+      </div>
+
+      <div className="mt-7">
+        <p className="text-sm font-bold uppercase tracking-[0.25em] text-orange-300">
+          Student Deliverables
+        </p>
+
+        <ul className="mt-4 space-y-2">
+          {mission.deliverables.slice(0, 4).map((item: string) => (
+            <li key={item} className="flex items-center gap-3 text-sm text-slate-300">
+              <span className="h-2 w-2 rounded-full bg-orange-400" />
+              {item}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </article>
   );
 }

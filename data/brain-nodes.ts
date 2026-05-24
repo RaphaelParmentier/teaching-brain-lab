@@ -1,206 +1,160 @@
-export type BrainCategory =
-  | "core"
-  | "teaching"
-  | "data"
-  | "ai"
-  | "development"
-  | "domain";
-
 export interface BrainNodeData {
   id: string;
   label: string;
-  category: BrainCategory;
+  category: string;
   description: string;
-  x: number;
-  y: number;
   color: string;
-  skills?: string[];
-  projects?: string[];
-  courses?: string[];
-  missions?: string[];
-  topics?: string[];
+  skills: string[];
+  missions: string[];
+  topics: string[];
 }
 
 export const brainNodes: BrainNodeData[] = [
   {
-    id: "teaching",
-    label: "Teaching Architecture",
-    category: "core",
+    id: "core",
+    label: "Learning by Doing",
+    category: "Teaching System",
     description:
-      "Designing learning systems that connect statistical reasoning, data analysis, AI workflows and applied software engineering.",
-    x: 0,
-    y: 0,
+      "A project-based teaching philosophy where students build, test, interpret and communicate real analytical outputs.",
     color: "#F97316",
     skills: [
-      "Curriculum Design",
       "Applied Pedagogy",
-      "Data Literacy",
+      "Project-Based Learning",
       "Technical Mentoring",
-    ],
-    courses: [
-      "Marketing Analytics",
-      "Big Data Healthcare",
-      "Introduction to R",
-      "Data Visualization",
+      "Scientific Rigor",
     ],
     missions: [
-      "Transform complex technical topics into applied learning experiences.",
-      "Build practical workshops based on real datasets and business cases.",
+      "Design realistic learning situations based on data, statistics, machine learning and AI workflows.",
+      "Move students from passive understanding to autonomous analytical production.",
     ],
     topics: [
-      "Learning-by-doing",
+      "Learning by doing",
       "Case-based teaching",
-      "Scientific rigor",
-      "Project supervision",
+      "Professional deliverables",
+      "Critical reasoning",
     ],
   },
   {
-    id: "statistics",
-    label: "Statistical Thinking",
-    category: "data",
+    id: "data-strategy",
+    label: "Data Strategy",
+    category: "Program",
     description:
-      "Teaching students how to reason under uncertainty: inference, experimental design, modelling, interpretation and critical thinking.",
-    x: -250,
-    y: -120,
-    color: "#38BDF8",
-    skills: [
-      "Hypothesis Testing",
-      "Regression",
-      "Experimental Design",
-      "Biostatistics",
-    ],
-    missions: [
-      "Move students from formula application to statistical reasoning.",
-      "Explain what results mean, not only how to compute them.",
-    ],
-    topics: [
-      "Inference",
-      "Sampling",
-      "Bias",
-      "Uncertainty",
-      "Model interpretation",
-    ],
-  },
-  {
-    id: "data-science",
-    label: "Data & Analytics",
-    category: "data",
-    description:
-      "Teaching the full analytical workflow: importing, cleaning, exploring, visualizing and communicating data-driven decisions.",
-    x: -250,
-    y: 120,
+      "Teaching students how to clean, structure, explore and use data to support business decisions.",
     color: "#22C55E",
     skills: [
       "Data Cleaning",
-      "EDA",
+      "KPI Design",
       "Visualization",
+      "Business Analytics",
       "Storytelling",
-      "KPIs",
-    ],
-    courses: [
-      "Marketing Analytics",
-      "Data Visualization",
-      "R Programming",
     ],
     missions: [
-      "Guide students through messy datasets and real-world analytical constraints.",
-      "Use data visualization to support clear business recommendations.",
+      "FoodTech Expansion Strategy",
+      "European Economic Indicators",
+      "Renault vs Tesla Analytics",
     ],
     topics: [
       "Data quality",
-      "Base 100 indexes",
+      "KPIs",
+      "Base 100 index",
       "Dashboards",
       "Decision support",
     ],
   },
   {
-    id: "ai",
-    label: "AI Systems",
-    category: "ai",
+    id: "statistical-reasoning",
+    label: "Statistical Reasoning",
+    category: "Program",
     description:
-      "Teaching modern AI through practical workflows: LLMs, prompt engineering, RAG, evaluation and responsible use.",
-    x: 250,
-    y: -120,
+      "Helping students reason under uncertainty and interpret evidence with statistical rigor.",
+    color: "#38BDF8",
+    skills: [
+      "Inference",
+      "Hypothesis Testing",
+      "Bias Detection",
+      "Uncertainty",
+      "Interpretation",
+    ],
+    missions: ["Healthcare Statistical Reasoning"],
+    topics: [
+      "Sampling",
+      "Confidence intervals",
+      "P-values",
+      "Bias",
+      "Scientific interpretation",
+    ],
+  },
+  {
+    id: "ml-strategy",
+    label: "Machine Learning",
+    category: "Program",
+    description:
+      "Teaching how predictive models are trained, evaluated, compared and interpreted.",
     color: "#A78BFA",
     skills: [
-      "LLMs",
-      "Prompt Engineering",
-      "RAG",
-      "AI Evaluation",
-      "Automation",
+      "Model Training",
+      "Cross Validation",
+      "Feature Engineering",
+      "Overfitting Detection",
+      "Model Evaluation",
     ],
-    missions: [
-      "Help learners understand what generative AI can and cannot do.",
-      "Turn AI concepts into usable workflows and product ideas.",
-    ],
+    missions: ["Healthcare Prediction"],
     topics: [
-      "Agents",
-      "Retrieval",
+      "Train/test split",
+      "Cross validation",
+      "ROC-AUC",
+      "Precision / Recall",
+      "Interpretability",
+    ],
+  },
+  {
+    id: "ai-workflows",
+    label: "AI Workflows",
+    category: "Program",
+    description:
+      "Teaching how modern AI systems work and how to integrate them responsibly into professional workflows.",
+    color: "#2DD4BF",
+    skills: [
+      "Prompt Engineering",
+      "AI Evaluation",
+      "Knowledge Structuring",
+      "Workflow Design",
+      "Critical Thinking",
+    ],
+    missions: ["AI Assistant Design"],
+    topics: [
+      "LLMs",
+      "Transformers",
+      "Embeddings",
+      "RAG",
       "Hallucinations",
-      "Evaluation",
       "Human-in-the-loop",
     ],
   },
   {
-    id: "development",
-    label: "Software Engineering",
-    category: "development",
+    id: "communication",
+    label: "Professional Communication",
+    category: "Transversal Skill",
     description:
-      "Connecting data and AI concepts to real applications through Python, APIs, full-stack development and automation.",
-    x: 250,
-    y: 120,
+      "Transforming technical analysis into clear deliverables, executive summaries and decision-oriented presentations.",
     color: "#F59E0B",
     skills: [
-      "Python",
-      "FastAPI",
-      "Next.js",
-      "TypeScript",
-      "Automation",
-    ],
-    projects: [
-      "AI Data Quality Auditor",
-      "Teaching Brain Lab",
+      "Reporting",
+      "Executive Summary",
+      "Data Storytelling",
+      "Presentation",
+      "Stakeholder Communication",
     ],
     missions: [
-      "Show how analytical work becomes usable software.",
-      "Teach maintainable workflows rather than isolated scripts.",
+      "Present across all teaching missions",
+      "Turns analytical work into usable recommendations",
     ],
     topics: [
-      "APIs",
-      "Frontend",
-      "Backend",
-      "Deployment",
-      "Product thinking",
-    ],
-  },
-  {
-    id: "healthcare",
-    label: "Healthcare & Research",
-    category: "domain",
-    description:
-      "Bridging pharmaceutical statistics, bioinformatics and health data to teach applied analytics in scientific contexts.",
-    x: 0,
-    y: 260,
-    color: "#FB7185",
-    skills: [
-      "Biostatistics",
-      "Bioinformatics",
-      "Clinical Research",
-      "Health Data",
-    ],
-    courses: [
-      "Big Data Healthcare",
-      "Health Analytics",
-    ],
-    missions: [
-      "Bring scientific rigor into data and AI education.",
-      "Use healthcare examples to teach data quality, uncertainty and interpretation.",
-    ],
-    topics: [
-      "Pharma",
-      "Preclinical statistics",
-      "Research data",
-      "Regulated environments",
+      "Storytelling",
+      "Communication",
+      "Synthesis",
+      "Decision-making",
+      "Presentation design",
     ],
   },
 ];
