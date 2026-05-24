@@ -8,38 +8,60 @@ import BrainPanel from "@/components/brain/BrainPanel";
 import LearningJourney from "@/components/journey/LearningJourney";
 
 const nodePositions: Record<string, { x: number; y: number }> = {
-  teaching: { x: 49, y: 42 },
-  statistics: { x: 28, y: 24 },
-  "data-science": { x: 28, y: 58 },
-  ai: { x: 67, y: 24 },
-  development: { x: 67, y: 58 },
-  healthcare: { x: 49, y: 78 },
+  core: { x: 49, y: 42 },
+  "data-strategy": { x: 28, y: 24 },
+  "statistical-reasoning": { x: 28, y: 58 },
+  "ml-strategy": { x: 67, y: 24 },
+  "ai-workflows": { x: 67, y: 58 },
+  communication: { x: 49, y: 78 },
 };
 
 const edges = [
-  { id: "teaching-statistics", from: "teaching", to: "statistics" },
-  { id: "teaching-data-science", from: "teaching", to: "data-science" },
-  { id: "teaching-ai", from: "teaching", to: "ai" },
-  { id: "teaching-development", from: "teaching", to: "development" },
-  { id: "teaching-healthcare", from: "teaching", to: "healthcare" },
-  { id: "statistics-healthcare", from: "statistics", to: "healthcare" },
-  { id: "ai-development", from: "ai", to: "development" },
-  { id: "data-development", from: "data-science", to: "development" },
+  { id: "core-data-strategy", from: "core", to: "data-strategy" },
+  { id: "core-statistical-reasoning", from: "core", to: "statistical-reasoning" },
+  { id: "core-ml-strategy", from: "core", to: "ml-strategy" },
+  { id: "core-ai-workflows", from: "core", to: "ai-workflows" },
+  { id: "core-communication", from: "core", to: "communication" },
+  { id: "data-statistics", from: "data-strategy", to: "statistical-reasoning" },
+  { id: "statistics-ml", from: "statistical-reasoning", to: "ml-strategy" },
+  { id: "ml-ai", from: "ml-strategy", to: "ai-workflows" },
+  { id: "communication-data", from: "communication", to: "data-strategy" },
+  { id: "communication-ai", from: "communication", to: "ai-workflows" },
 ];
 
 const routes: Record<string, string[]> = {
-  teaching: [
-    "teaching-statistics",
-    "teaching-data-science",
-    "teaching-ai",
-    "teaching-development",
-    "teaching-healthcare",
+  core: [
+    "core-data-strategy",
+    "core-statistical-reasoning",
+    "core-ml-strategy",
+    "core-ai-workflows",
+    "core-communication",
   ],
-  statistics: ["teaching-statistics", "statistics-healthcare"],
-  "data-science": ["teaching-data-science", "data-development"],
-  ai: ["teaching-ai", "ai-development"],
-  development: ["teaching-development", "ai-development", "data-development"],
-  healthcare: ["teaching-healthcare", "statistics-healthcare"],
+  "data-strategy": [
+    "core-data-strategy",
+    "data-statistics",
+    "communication-data",
+  ],
+  "statistical-reasoning": [
+    "core-statistical-reasoning",
+    "data-statistics",
+    "statistics-ml",
+  ],
+  "ml-strategy": [
+    "core-ml-strategy",
+    "statistics-ml",
+    "ml-ai",
+  ],
+  "ai-workflows": [
+    "core-ai-workflows",
+    "ml-ai",
+    "communication-ai",
+  ],
+  communication: [
+    "core-communication",
+    "communication-data",
+    "communication-ai",
+  ],
 };
 
 function getCurve(from: { x: number; y: number }, to: { x: number; y: number }) {
@@ -57,7 +79,7 @@ export default function BrainCanvas() {
   );
   const [mouse, setMouse] = useState({ x: 1200, y: 420 });
 
-  const activeNodeId = selectedNode?.id ?? "teaching";
+  const activeNodeId = selectedNode?.id ?? "core";
   const activeRouteIds = routes[activeNodeId] ?? [];
 
   return (
@@ -174,7 +196,7 @@ export default function BrainCanvas() {
             node={node}
             position={nodePositions[node.id]}
             isActive={activeNodeId === node.id}
-            isCore={node.id === "teaching"}
+            isCore={node.id === "core"}
             onClick={() => setSelectedNode(node)}
           />
         ))}
