@@ -57,7 +57,7 @@ export default function BrainCanvas() {
                 aria-label={node.label}
               >
                 <span
-                  className="absolute h-28 w-28 rounded-full opacity-25 blur-2xl transition duration-300"
+                  className="absolute h-28 w-28 rounded-full opacity-20 blur-2xl transition duration-300"
                   style={{
                     backgroundColor: node.color,
                     opacity: isActive ? 0.55 : 0.22,
@@ -125,12 +125,12 @@ export default function BrainCanvas() {
       style: {
         stroke: isActive
           ? "rgba(125, 211, 252, 1)"
-          : "rgba(125, 211, 252, 0.16)",
-        strokeWidth: isActive ? 5 : 1.5,
+          : "rgba(125, 211, 252, 0.26)",
+        strokeWidth: isActive ? 5 : 2,
         strokeDasharray: "8 8",
         filter: isActive
           ? "drop-shadow(0 0 18px rgba(56, 189, 248, 1))"
-          : "drop-shadow(0 0 3px rgba(56, 189, 248, 0.18))",
+          : "drop-shadow(0 0 6px rgba(56, 189, 248, 0.35))",
       },
     };
   });
@@ -166,9 +166,6 @@ export default function BrainCanvas() {
 
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(0,0,0,0.25)_60%,rgba(0,0,0,0.92)_100%)]" />
 
-      <div className="pointer-events-none absolute left-[35%] top-[12%] h-[70vh] w-[42vw] rounded-[50%] border border-white/5 opacity-30 blur-[1px]" />
-      <div className="pointer-events-none absolute left-[41%] top-[18%] h-[54vh] w-[30vw] rounded-[50%] border border-orange-300/10 opacity-40 blur-[2px]" />
-
       <div className="absolute left-12 top-10 z-10 max-w-[560px]">
         <div className="inline-flex items-center gap-3 rounded-full border border-orange-400/30 bg-orange-400/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.3em] text-orange-300 shadow-[0_0_35px_rgba(249,115,22,0.18)]">
           <span className="h-2 w-2 rounded-full bg-orange-400 shadow-[0_0_18px_rgba(249,115,22,0.95)]" />
@@ -188,6 +185,12 @@ export default function BrainCanvas() {
 
       <div className="absolute right-10 top-10 z-20">
         <LearningJourney />
+      </div>
+
+      <div className="pointer-events-none absolute left-[37%] top-[16%] z-[1] h-[62vh] w-[42vw] opacity-20">
+        <div className="absolute left-[8%] top-[8%] h-[46%] w-[38%] rounded-[55%_45%_50%_50%] border border-orange-300/20 shadow-[0_0_80px_rgba(249,115,22,0.12)]" />
+        <div className="absolute right-[8%] top-[8%] h-[46%] w-[38%] rounded-[45%_55%_50%_50%] border border-orange-300/20 shadow-[0_0_80px_rgba(249,115,22,0.12)]" />
+        <div className="absolute bottom-[10%] left-[18%] h-[38%] w-[64%] rounded-[45%_45%_55%_55%] border border-orange-300/15" />
       </div>
 
       <ReactFlow
@@ -215,3 +218,4 @@ export default function BrainCanvas() {
     </section>
   );
 }
+

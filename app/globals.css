@@ -56,3 +56,21 @@ body {
 .react-flow__handle-bottom {
   display: none !important;
 }
+
+.react-flow {
+  z-index: 5;
+}
+
+.react-flow__renderer,
+.react-flow__edges,
+.react-flow__nodes {
+  z-index: 5;
+}
+
+.react-flow__edges {
+  z-index: 6;
+}
+
+.react-flow__nodes {
+  z-index: 7;
+}
