@@ -64,3 +64,27 @@ body {
     stroke-dashoffset: -12;
   }
 }
+
+.neural-route,
+.neural-route-active {
+  stroke-dashoffset: 0;
+  animation: neural-flow 2.4s linear infinite;
+}
+
+.neural-route {
+  opacity: 0.65;
+}
+
+.neural-route-active {
+  opacity: 1;
+}
+
+@keyframes neural-flow {
+  from {
+    stroke-dashoffset: 0;
+  }
+
+  to {
+    stroke-dashoffset: -12;
+  }
+}
