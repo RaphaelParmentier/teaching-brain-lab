@@ -82,6 +82,43 @@ export default function LearningJourney() {
                 {selectedStep.description}
               </p>
 
+              <div className="mt-10 rounded-[1.5rem] border border-cyan-400/20 bg-cyan-400/10 p-6">
+                <p className="text-sm font-bold uppercase tracking-[0.3em] text-cyan-200">
+                  Active Learning Route
+                </p>
+
+                <div className="mt-5 flex flex-wrap items-center gap-3">
+                  {learningPath.map((step, index) => {
+                    const isPastOrActive =
+                      learningPath.findIndex((item) => item.id === selectedStep.id) >= index;
+
+                    return (
+                      <div key={step.id} className="flex items-center gap-3">
+                        <span
+                          className={`rounded-full border px-4 py-2 text-sm font-semibold ${
+                            isPastOrActive
+                              ? "border-cyan-300/40 bg-cyan-300/15 text-cyan-100 shadow-[0_0_20px_rgba(56,189,248,0.18)]"
+                              : "border-white/10 bg-white/5 text-slate-500"
+                          }`}
+                        >
+                          {step.title}
+                        </span>
+
+                        {index < learningPath.length - 1 && (
+                          <span
+                            className={
+                              isPastOrActive ? "text-cyan-300" : "text-slate-700"
+                            }
+                          >
+                            →
+                          </span>
+                        )}
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+
               <div className="mt-10 grid grid-cols-3 gap-6">
                 <InfoBlock title="Concepts" items={selectedStep.concepts} />
                 <InfoBlock title="Tools" items={selectedStep.tools} />

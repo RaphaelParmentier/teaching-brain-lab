@@ -97,7 +97,7 @@ export const learningPath: LearningStep[] = [
     projects: [
       "Predictive Analytics",
     ],
-    relatedMissionIds: ["foodtech"],
+    relatedMissionIds: ["healthcare"],
   },
 
   {
@@ -120,7 +120,7 @@ export const learningPath: LearningStep[] = [
     projects: [
       "Generative AI Workshop",
     ],
-    relatedMissionIds: ["foodtech"],
+    relatedMissionIds: ["genai"],
   },
 
   {
@@ -144,6 +144,6 @@ export const learningPath: LearningStep[] = [
       "AI Data Quality Auditor",
       "Teaching Brain",
     ],
-    relatedMissionIds: ["foodtech"],
+    relatedMissionIds: ["foodtech", "healthcare", "genai"],
   },
 ];
