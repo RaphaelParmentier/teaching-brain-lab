@@ -41,36 +41,26 @@ body {
   }
 }
 
-.react-flow__node {
-  overflow: visible;
+.neural-route,
+.neural-route-active {
+  stroke-dashoffset: 0;
+  animation: neural-flow 2.4s linear infinite;
 }
 
-.react-flow__node:hover {
-  filter: none;
+.neural-route {
+  opacity: 0.55;
 }
 
-.react-flow__handle,
-.react-flow__handle-left,
-.react-flow__handle-right,
-.react-flow__handle-top,
-.react-flow__handle-bottom {
-  display: none !important;
+.neural-route-active {
+  opacity: 1;
 }
 
-.react-flow {
-  z-index: 5;
-}
+@keyframes neural-flow {
+  from {
+    stroke-dashoffset: 0;
+  }
 
-.react-flow__renderer,
-.react-flow__edges,
-.react-flow__nodes {
-  z-index: 5;
-}
-
-.react-flow__edges {
-  z-index: 6;
-}
-
-.react-flow__nodes {
-  z-index: 7;
+  to {
+    stroke-dashoffset: -12;
+  }
 }
