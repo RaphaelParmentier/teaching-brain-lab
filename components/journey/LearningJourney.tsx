@@ -93,32 +93,34 @@ export default function LearningJourney() {
                   Teaching Missions
                 </p>
 
-                <div className="mt-5 grid grid-cols-3 gap-5">
-                  {teachingMissions.map((mission) => (
-                    <article
-                      key={mission.id}
-                      className="rounded-[1.5rem] border border-orange-400/20 bg-white/5 p-6"
-                    >
-                      <h4 className="text-2xl font-semibold leading-tight tracking-[-0.04em] text-white">
-                        {mission.title}
-                      </h4>
+                <div className="mt-5 grid grid-cols-2 gap-5">
+                  {teachingMissions
+                    .filter((mission) => selectedStep.relatedMissionIds.includes(mission.id))
+                    .map((mission) => (
+                      <article
+                        key={mission.id}
+                        className="rounded-[1.5rem] border border-orange-400/20 bg-white/5 p-6"
+                      >
+                        <h4 className="text-2xl font-semibold leading-tight tracking-[-0.04em] text-white">
+                          {mission.title}
+                        </h4>
 
-                      <p className="mt-4 text-base leading-7 text-slate-300">
-                        {mission.description}
-                      </p>
+                        <p className="mt-4 text-base leading-7 text-slate-300">
+                          {mission.description}
+                        </p>
 
-                      <div className="mt-5 flex flex-wrap gap-2">
-                        {mission.tools.slice(0, 4).map((tool) => (
-                          <span
-                            key={tool}
-                            className="rounded-full border border-orange-400/30 bg-orange-400/10 px-3 py-1 text-xs font-semibold text-orange-200"
-                          >
-                            {tool}
-                          </span>
-                        ))}
-                      </div>
-                    </article>
-                  ))}
+                        <div className="mt-5 flex flex-wrap gap-2">
+                          {mission.tools.slice(0, 4).map((tool) => (
+                            <span
+                              key={tool}
+                              className="rounded-full border border-orange-400/30 bg-orange-400/10 px-3 py-1 text-xs font-semibold text-orange-200"
+                            >
+                              {tool}
+                            </span>
+                          ))}
+                        </div>
+                      </article>
+                    ))}
                 </div>
               </section>
             </main>

@@ -6,6 +6,7 @@ export interface LearningStep {
   concepts: string[];
   tools: string[];
   projects: string[];
+  relatedMissionIds: string[];
 }
 
 export const learningPath: LearningStep[] = [
@@ -28,6 +29,7 @@ export const learningPath: LearningStep[] = [
     projects: [
       "Business Metrics",
     ],
+    relatedMissionIds: ["foodtech"],
   },
 
   {
@@ -50,6 +52,7 @@ export const learningPath: LearningStep[] = [
     projects: [
       "Healthcare Analytics",
     ],
+    relatedMissionIds: ["healthcare"],
   },
 
   {
@@ -72,6 +75,7 @@ export const learningPath: LearningStep[] = [
     projects: [
       "FoodTech Expansion",
     ],
+    relatedMissionIds: ["foodtech"],
   },
 
   {
@@ -93,6 +97,7 @@ export const learningPath: LearningStep[] = [
     projects: [
       "Predictive Analytics",
     ],
+    relatedMissionIds: ["foodtech"],
   },
 
   {
@@ -115,6 +120,7 @@ export const learningPath: LearningStep[] = [
     projects: [
       "Generative AI Workshop",
     ],
+    relatedMissionIds: ["foodtech"],
   },
 
   {
@@ -138,5 +144,6 @@ export const learningPath: LearningStep[] = [
       "AI Data Quality Auditor",
       "Teaching Brain",
     ],
+    relatedMissionIds: ["foodtech"],
   },
 ];
