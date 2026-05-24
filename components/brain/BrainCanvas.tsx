@@ -11,12 +11,29 @@ type Position = { x: number; y: number };
 
 const nodePositions: Record<string, Position> = {
   core: { x: 50, y: 45 },
-  "data-strategy": { x: 32, y: 52 },
-  "statistical-reasoning": { x: 39, y: 30 },
+  "data-strategy": { x: 29, y: 53 },
+  "statistical-reasoning": { x: 38, y: 31 },
   "ml-strategy": { x: 58, y: 30 },
-  "ai-workflows": { x: 69, y: 52 },
+  "ai-workflows": { x: 70, y: 52 },
   communication: { x: 53, y: 70 },
 };
+
+const routes = [
+  { id: "data-stats", from: "data-strategy", to: "statistical-reasoning", kind: "progression" },
+  { id: "stats-ml", from: "statistical-reasoning", to: "ml-strategy", kind: "progression" },
+  { id: "ml-ai", from: "ml-strategy", to: "ai-workflows", kind: "progression" },
+
+  { id: "core-data", from: "core", to: "data-strategy", kind: "core" },
+  { id: "core-stats", from: "core", to: "statistical-reasoning", kind: "core" },
+  { id: "core-ml", from: "core", to: "ml-strategy", kind: "core" },
+  { id: "core-ai", from: "core", to: "ai-workflows", kind: "core" },
+  { id: "core-communication", from: "core", to: "communication", kind: "core" },
+
+  { id: "data-communication", from: "data-strategy", to: "communication", kind: "communication" },
+  { id: "stats-communication", from: "statistical-reasoning", to: "communication", kind: "communication" },
+  { id: "ml-communication", from: "ml-strategy", to: "communication", kind: "communication" },
+  { id: "ai-communication", from: "ai-workflows", to: "communication", kind: "communication" },
+];
 
 const semanticRoutes: Record<string, string[]> = {
   core: ["core-data", "core-stats", "core-ml", "core-ai", "core-communication"],
@@ -33,51 +50,38 @@ const semanticRoutes: Record<string, string[]> = {
   ],
 };
 
-const routes = [
-  { id: "core-data", from: "core", to: "data-strategy", meaning: "Project-based data foundations" },
-  { id: "core-stats", from: "core", to: "statistical-reasoning", meaning: "Evidence-based reasoning" },
-  { id: "core-ml", from: "core", to: "ml-strategy", meaning: "Applied model building" },
-  { id: "core-ai", from: "core", to: "ai-workflows", meaning: "Responsible AI usage" },
-  { id: "core-communication", from: "core", to: "communication", meaning: "Professional deliverables" },
-
-  { id: "data-stats", from: "data-strategy", to: "statistical-reasoning", meaning: "Clean data enables sound inference" },
-  { id: "stats-ml", from: "statistical-reasoning", to: "ml-strategy", meaning: "Statistics supports robust ML evaluation" },
-  { id: "ml-ai", from: "ml-strategy", to: "ai-workflows", meaning: "ML concepts clarify modern AI systems" },
-
-  { id: "data-communication", from: "data-strategy", to: "communication", meaning: "Dashboards and business recommendations" },
-  { id: "stats-communication", from: "statistical-reasoning", to: "communication", meaning: "Explain uncertainty clearly" },
-  { id: "ml-communication", from: "ml-strategy", to: "communication", meaning: "Translate model results into decisions" },
-  { id: "ai-communication", from: "ai-workflows", to: "communication", meaning: "Document and evaluate AI workflows" },
-];
-
-const circuitNodes = [
-  { x: 25, y: 36 }, { x: 30, y: 28 }, { x: 35, y: 41 },
-  { x: 43, y: 22 }, { x: 51, y: 25 }, { x: 64, y: 22 },
-  { x: 74, y: 34 }, { x: 78, y: 47 }, { x: 73, y: 64 },
-  { x: 62, y: 72 }, { x: 46, y: 75 }, { x: 33, y: 67 },
-  { x: 24, y: 52 }, { x: 39, y: 56 }, { x: 61, y: 55 },
-];
-
-function getCurve(from: Position, to: Position) {
+function getCurve(from: Position, to: Position, kind: string) {
   const midX = (from.x + to.x) / 2;
   const midY = (from.y + to.y) / 2;
-  const bend = Math.abs(from.x - to.x) > 20 ? 6 : 4;
 
-  return `M ${from.x} ${from.y} Q ${midX} ${midY - bend}, ${to.x} ${to.y}`;
+  if (kind === "progression") {
+    return `M ${from.x} ${from.y} C ${midX} ${from.y - 11}, ${midX} ${
+      to.y - 11
+    }, ${to.x} ${to.y}`;
+  }
+
+  if (kind === "communication") {
+    return `M ${from.x} ${from.y} C ${midX} ${midY + 15}, ${midX} ${
+      to.y + 10
+    }, ${to.x} ${to.y}`;
+  }
+
+  return `M ${from.x} ${from.y} C ${midX} ${from.y - 5}, ${midX} ${
+    to.y + 5
+  }, ${to.x} ${to.y}`;
 }
 
 export default function BrainCanvas() {
-  const [selectedNode, setSelectedNode] = useState<BrainNodeData | null>(brainNodes[0]);
-  const [mouse, setMouse] = useState({ x: 1200, y: 420 });
+  const [selectedNode, setSelectedNode] = useState<BrainNodeData | null>(
+    brainNodes[0]
+  );
 
   const activeNodeId = selectedNode?.id ?? "core";
   const activeRouteIds = semanticRoutes[activeNodeId] ?? [];
+  const activeColor = selectedNode?.color ?? "#F97316";
 
   return (
-    <section
-      className="relative h-screen w-full overflow-hidden bg-[#050505] text-white"
-      onMouseMove={(event) => setMouse({ x: event.clientX, y: event.clientY })}
-    >
+    <section className="relative h-screen w-full overflow-hidden bg-[#050505] text-white">
       <div className="pointer-events-none absolute inset-0 bg-[#050505]" />
 
       <div
@@ -93,13 +97,13 @@ export default function BrainCanvas() {
         className="pointer-events-none absolute inset-0"
         style={{
           background: `
-            radial-gradient(460px circle at ${mouse.x}px ${mouse.y}px, rgba(249,115,22,0.08), transparent 62%),
-            radial-gradient(760px circle at 50% 48%, rgba(14,165,233,0.06), transparent 58%)
+            radial-gradient(720px circle at 50% 48%, rgba(249,115,22,0.075), transparent 58%),
+            radial-gradient(640px circle at 57% 48%, ${activeColor}18, transparent 62%)
           `,
         }}
       />
 
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(0,0,0,0.2)_58%,rgba(0,0,0,0.94)_100%)]" />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(0,0,0,0.18)_58%,rgba(0,0,0,0.94)_100%)]" />
 
       <div className="absolute left-12 top-10 z-20 max-w-[560px]">
         <div className="inline-flex items-center gap-3 rounded-full border border-orange-400/30 bg-orange-400/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.3em] text-orange-300 shadow-[0_0_35px_rgba(249,115,22,0.18)]">
@@ -112,8 +116,9 @@ export default function BrainCanvas() {
         </h1>
 
         <p className="mt-7 max-w-[430px] text-base leading-7 text-slate-300">
-          Interactive teaching architecture built around learning by doing,
-          evidence-based thinking and professional data workflows.
+          A learning-by-doing architecture where data foundations, statistical
+          reasoning, machine learning and AI workflows connect into professional
+          deliverables.
         </p>
       </div>
 
@@ -128,8 +133,8 @@ export default function BrainCanvas() {
           preserveAspectRatio="none"
         >
           <defs>
-            <filter id="softGlow">
-              <feGaussianBlur stdDeviation="1.2" result="blur" />
+            <filter id="brainGlow">
+              <feGaussianBlur stdDeviation="1.1" result="blur" />
               <feMerge>
                 <feMergeNode in="blur" />
                 <feMergeNode in="SourceGraphic" />
@@ -139,60 +144,89 @@ export default function BrainCanvas() {
 
           <path
             d="
-              M 21 50
-              C 18 36, 28 20, 43 18
-              C 48 11, 61 12, 66 20
-              C 82 22, 88 36, 84 51
-              C 90 65, 78 78, 62 77
-              C 54 85, 39 82, 35 73
-              C 23 70, 16 60, 21 50
+              M 22 54
+              C 17 45, 20 34, 29 30
+              C 29 21, 38 16, 47 19
+              C 54 12, 66 15, 69 24
+              C 81 25, 86 35, 83 47
+              C 91 57, 84 70, 70 72
+              C 64 81, 50 82, 43 75
+              C 33 78, 23 70, 24 61
+              C 19 59, 18 56, 22 54
               Z
             "
-            fill="rgba(8,13,28,0.58)"
-            stroke="rgba(255,255,255,0.06)"
+            fill="rgba(249,115,22,0.035)"
+            stroke="rgba(249,115,22,0.16)"
             strokeWidth="0.18"
           />
 
-          {circuitNodes.map((point, index) => (
-            <circle
-              key={index}
-              cx={point.x}
-              cy={point.y}
-              r="0.36"
-              fill="rgba(125,211,252,0.22)"
-            />
-          ))}
+          <path
+            d="
+              M 50 21
+              C 49 31, 49 41, 50 52
+              C 51 61, 52 68, 53 76
+            "
+            fill="none"
+            stroke="rgba(249,115,22,0.11)"
+            strokeWidth="0.12"
+          />
+
+          <path
+            d="M 28 42 C 37 38, 44 39, 50 45 C 57 39, 67 39, 78 43"
+            fill="none"
+            stroke="rgba(249,115,22,0.1)"
+            strokeWidth="0.12"
+          />
+
+          <path
+            d="M 30 60 C 40 55, 48 56, 54 63 C 61 56, 70 57, 78 62"
+            fill="none"
+            stroke="rgba(249,115,22,0.085)"
+            strokeWidth="0.11"
+          />
 
           {routes.map((route) => {
             const from = nodePositions[route.from];
             const to = nodePositions[route.to];
             const isActive = activeRouteIds.includes(route.id);
-            const path = getCurve(from, to);
+            const path = getCurve(from, to, route.kind);
 
             return (
               <g key={route.id}>
                 <path
                   d={path}
                   fill="none"
-                  stroke={isActive ? "rgba(125,211,252,0.30)" : "rgba(125,211,252,0.075)"}
-                  strokeWidth={isActive ? 0.64 : 0.18}
+                  stroke={
+                    isActive
+                      ? `${activeColor}55`
+                      : "rgba(249,115,22,0.10)"
+                  }
+                  strokeWidth={isActive ? 0.72 : 0.16}
                   strokeLinecap="round"
-                  filter={isActive ? "url(#softGlow)" : undefined}
+                  filter={isActive ? "url(#brainGlow)" : undefined}
                 />
 
                 <path
                   className={isActive ? "neural-route-active" : "neural-route"}
                   d={path}
                   fill="none"
-                  stroke={isActive ? "rgba(186,230,253,0.98)" : "rgba(125,211,252,0.14)"}
-                  strokeWidth={isActive ? 0.22 : 0.075}
+                  stroke={
+                    isActive
+                      ? activeColor
+                      : "rgba(249,115,22,0.20)"
+                  }
+                  strokeWidth={isActive ? 0.22 : 0.07}
                   strokeDasharray="0.9 1.3"
                   strokeLinecap="round"
                 />
 
                 {isActive && (
-                  <circle r="0.42" fill="rgba(186,230,253,0.95)">
-                    <animateMotion dur="2s" repeatCount="indefinite" path={path} />
+                  <circle r="0.42" fill={activeColor}>
+                    <animateMotion
+                      dur="2s"
+                      repeatCount="indefinite"
+                      path={path}
+                    />
                   </circle>
                 )}
               </g>
@@ -210,6 +244,18 @@ export default function BrainCanvas() {
             onClick={() => setSelectedNode(node)}
           />
         ))}
+
+        <div className="absolute bottom-10 left-[37%] z-20 rounded-2xl border border-orange-400/20 bg-[#080D1C]/80 px-5 py-4 text-xs text-slate-300 backdrop-blur-xl">
+          <p className="font-bold uppercase tracking-[0.26em] text-orange-300">
+            Pedagogical route
+          </p>
+          <p className="mt-2 leading-6">
+            Data Strategy → Statistical Reasoning → Machine Learning → AI Workflows
+          </p>
+          <p className="mt-1 leading-6 text-slate-400">
+            Professional Communication supports every stage.
+          </p>
+        </div>
       </div>
 
       <BrainPanel selectedNode={selectedNode} />
@@ -246,7 +292,7 @@ function NeuralNode({
         className={`absolute top-0 rounded-full blur-3xl transition duration-500 ${haloSize}`}
         style={{
           backgroundColor: node.color,
-          opacity: isActive ? 0.6 : 0.16,
+          opacity: isActive ? 0.62 : 0.15,
         }}
       />
 
