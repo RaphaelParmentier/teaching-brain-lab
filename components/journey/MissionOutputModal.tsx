@@ -28,7 +28,8 @@ export default function MissionOutputModal({
 
             <p className="mt-4 max-w-3xl text-sm leading-6 text-slate-300">
               Extraits réalistes de livrables étudiants : chunks RMarkdown,
-              sorties console, tableaux tibble et code de visualisation.
+              sorties console, tableaux tibble, notebooks, code de visualisation
+              et notes d’interprétation.
             </p>
           </div>
 
