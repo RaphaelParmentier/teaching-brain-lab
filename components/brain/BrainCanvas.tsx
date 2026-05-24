@@ -186,13 +186,6 @@ export default function BrainCanvas() {
       <div className="absolute right-10 top-10 z-20">
         <LearningJourney />
       </div>
-
-      <div className="pointer-events-none absolute left-[37%] top-[16%] z-[1] h-[62vh] w-[42vw] opacity-20">
-        <div className="absolute left-[8%] top-[8%] h-[46%] w-[38%] rounded-[55%_45%_50%_50%] border border-orange-300/20 shadow-[0_0_80px_rgba(249,115,22,0.12)]" />
-        <div className="absolute right-[8%] top-[8%] h-[46%] w-[38%] rounded-[45%_55%_50%_50%] border border-orange-300/20 shadow-[0_0_80px_rgba(249,115,22,0.12)]" />
-        <div className="absolute bottom-[10%] left-[18%] h-[38%] w-[64%] rounded-[45%_45%_55%_55%] border border-orange-300/15" />
-      </div>
-
       <ReactFlow
         className="relative z-[5]"
         nodes={nodes}
@@ -212,7 +205,6 @@ export default function BrainCanvas() {
           setSelectedNode(clickedNode ?? null);
         }}
       >
-        <Background color="#1f2937" gap={32} />
       </ReactFlow>
 
       <BrainPanel selectedNode={selectedNode} />
