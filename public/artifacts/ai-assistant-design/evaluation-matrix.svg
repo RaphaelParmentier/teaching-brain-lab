@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="800" viewBox="0 0 1280 800">
+<defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#080D1C"/><stop offset="0.62" stop-color="#0F172A"/><stop offset="1" stop-color="#111827"/></linearGradient><radialGradient id="glow" cx="50%" cy="0%" r="70%"><stop offset="0" stop-color="#F97316" stop-opacity="0.33"/><stop offset="1" stop-color="#F97316" stop-opacity="0"/></radialGradient></defs>
+<rect width="1280" height="800" fill="url(#bg)"/><rect width="1280" height="800" fill="url(#glow)"/>
+<circle cx="1080" cy="120" r="220" fill="#F97316" opacity="0.08"/>
+<text x="70" y="86" fill="#FB923C" font-size="22" font-weight="700" letter-spacing="6" font-family="Inter,Arial">TEACHING ARTIFACT</text>
+<text x="70" y="145" fill="#FFFFFF" font-size="50" font-weight="750" font-family="Inter,Arial">AI Assistant Evaluation Matrix</text>
+<text x="70" y="190" fill="#CBD5E1" font-size="25" font-family="Inter,Arial">AI Assistant Design · RAG, prompt architecture and failure modes</text>
+<rect x="70" y="250" width="220" height="130" rx="22" fill="rgba(255,255,255,0.055)" stroke="rgba(255,255,255,0.12)"/>
+<text x="96" y="288" fill="#94A3B8" font-size="24" font-family="Inter,Arial">Criteria</text>
+<text x="96" y="342" fill="#FFFFFF" font-size="44" font-weight="700" font-family="Inter,Arial">6</text><rect x="320" y="250" width="220" height="130" rx="22" fill="rgba(255,255,255,0.055)" stroke="rgba(255,255,255,0.12)"/>
+<text x="346" y="288" fill="#94A3B8" font-size="24" font-family="Inter,Arial">Eval cases</text>
+<text x="346" y="342" fill="#FFFFFF" font-size="44" font-weight="700" font-family="Inter,Arial">24</text><rect x="570" y="250" width="220" height="130" rx="22" fill="rgba(255,255,255,0.055)" stroke="rgba(255,255,255,0.12)"/>
+<text x="596" y="288" fill="#94A3B8" font-size="24" font-family="Inter,Arial">Risk</text>
+<text x="596" y="342" fill="#FFFFFF" font-size="44" font-weight="700" font-family="Inter,Arial">Hallucination</text><rect x="820" y="250" width="220" height="130" rx="22" fill="rgba(255,255,255,0.055)" stroke="rgba(255,255,255,0.12)"/>
+<text x="846" y="288" fill="#94A3B8" font-size="24" font-family="Inter,Arial">Control</text>
+<text x="846" y="342" fill="#FFFFFF" font-size="44" font-weight="700" font-family="Inter,Arial">HITL</text><rect x="70" y="455" width="560" height="230" rx="22" fill="rgba(15,23,42,0.75)" stroke="rgba(255,255,255,0.12)"/>
+<text x="94" y="495" fill="#F8FAFC" font-size="26" font-weight="700" font-family="Inter,Arial">Evaluation dimensions</text><text x="94" y="539" fill="#CBD5E1" font-size="21" font-family="Inter,Arial">Factuality</text><text x="450" y="539" fill="#FFFFFF" font-size="21" font-weight="700" font-family="Inter,Arial">source-grounded</text><text x="94" y="583" fill="#CBD5E1" font-size="21" font-family="Inter,Arial">Usefulness</text><text x="450" y="583" fill="#FFFFFF" font-size="21" font-weight="700" font-family="Inter,Arial">task success</text><text x="94" y="627" fill="#CBD5E1" font-size="21" font-family="Inter,Arial">Traceability</text><text x="450" y="627" fill="#FFFFFF" font-size="21" font-weight="700" font-family="Inter,Arial">citations</text><text x="94" y="671" fill="#CBD5E1" font-size="21" font-family="Inter,Arial">Failure mode</text><text x="450" y="671" fill="#FFFFFF" font-size="21" font-weight="700" font-family="Inter,Arial">refusal / uncertainty</text><text x="700" y="488" fill="#CBD5E1" font-size="23" font-family="Inter,Arial">Knowledge grounding</text>
+<rect x="700" y="500" width="390" height="18" rx="9" fill="rgba(255,255,255,0.10)"/>
+<rect x="700" y="500" width="343" height="18" rx="9" fill="#F97316"/><text x="700" y="558" fill="#CBD5E1" font-size="23" font-family="Inter,Arial">Prompt robustness</text>
+<rect x="700" y="570" width="390" height="18" rx="9" fill="rgba(255,255,255,0.10)"/>
+<rect x="700" y="570" width="319" height="18" rx="9" fill="#F97316"/><text x="700" y="628" fill="#CBD5E1" font-size="23" font-family="Inter,Arial">Human-in-loop safety</text>
+<rect x="700" y="640" width="390" height="18" rx="9" fill="rgba(255,255,255,0.10)"/>
+<rect x="700" y="640" width="362" height="18" rx="9" fill="#F97316"/>
+<text x="70" y="744" fill="#64748B" font-size="20" font-family="Inter,Arial">Raphaël Parmentier · Data · Statistics · AI pedagogy</text>
+</svg>

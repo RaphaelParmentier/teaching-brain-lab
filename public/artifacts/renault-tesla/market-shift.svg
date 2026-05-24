@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="800" viewBox="0 0 1280 800">
+<defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#080D1C"/><stop offset="0.62" stop-color="#0F172A"/><stop offset="1" stop-color="#111827"/></linearGradient><radialGradient id="glow" cx="50%" cy="0%" r="70%"><stop offset="0" stop-color="#F97316" stop-opacity="0.33"/><stop offset="1" stop-color="#F97316" stop-opacity="0"/></radialGradient></defs>
+<rect width="1280" height="800" fill="url(#bg)"/><rect width="1280" height="800" fill="url(#glow)"/>
+<circle cx="1080" cy="120" r="220" fill="#F97316" opacity="0.08"/>
+<text x="70" y="86" fill="#FB923C" font-size="22" font-weight="700" letter-spacing="6" font-family="Inter,Arial">TEACHING ARTIFACT</text>
+<text x="70" y="145" fill="#FFFFFF" font-size="50" font-weight="750" font-family="Inter,Arial">EV Market Shift Dashboard</text>
+<text x="70" y="190" fill="#CBD5E1" font-size="25" font-family="Inter,Arial">Renault vs Tesla Analytics · 2020–2025 comparative signal</text>
+<rect x="70" y="250" width="220" height="130" rx="22" fill="rgba(255,255,255,0.055)" stroke="rgba(255,255,255,0.12)"/>
+<text x="96" y="288" fill="#94A3B8" font-size="24" font-family="Inter,Arial">Tesla 2025</text>
+<text x="96" y="342" fill="#FFFFFF" font-size="44" font-weight="700" font-family="Inter,Arial">25k</text><rect x="320" y="250" width="220" height="130" rx="22" fill="rgba(255,255,255,0.055)" stroke="rgba(255,255,255,0.12)"/>
+<text x="346" y="288" fill="#94A3B8" font-size="24" font-family="Inter,Arial">Renault 2025</text>
+<text x="346" y="342" fill="#FFFFFF" font-size="44" font-weight="700" font-family="Inter,Arial">80k</text><rect x="570" y="250" width="220" height="130" rx="22" fill="rgba(255,255,255,0.055)" stroke="rgba(255,255,255,0.12)"/>
+<text x="596" y="288" fill="#94A3B8" font-size="24" font-family="Inter,Arial">Signal</text>
+<text x="596" y="342" fill="#FFFFFF" font-size="44" font-weight="700" font-family="Inter,Arial">Reversal</text><rect x="820" y="250" width="220" height="130" rx="22" fill="rgba(255,255,255,0.055)" stroke="rgba(255,255,255,0.12)"/>
+<text x="846" y="288" fill="#94A3B8" font-size="24" font-family="Inter,Arial">Peak Tesla</text>
+<text x="846" y="342" fill="#FFFFFF" font-size="44" font-weight="700" font-family="Inter,Arial">70k</text><rect x="70" y="455" width="520" height="220" rx="22" fill="rgba(15,23,42,0.75)" stroke="rgba(255,255,255,0.12)"/>
+<text x="94" y="495" fill="#F8FAFC" font-size="26" font-weight="700" font-family="Inter,Arial">Registration timeline</text><text x="94" y="539" fill="#CBD5E1" font-size="21" font-family="Inter,Arial">Tesla 2020 → 2025</text><text x="410" y="539" fill="#FFFFFF" font-size="21" font-weight="700" font-family="Inter,Arial">18k → 25k</text><text x="94" y="583" fill="#CBD5E1" font-size="21" font-family="Inter,Arial">Renault 2020 → 2025</text><text x="410" y="583" fill="#FFFFFF" font-size="21" font-weight="700" font-family="Inter,Arial">30k → 80k</text><text x="94" y="627" fill="#CBD5E1" font-size="21" font-family="Inter,Arial">Crossover</text><text x="410" y="627" fill="#FFFFFF" font-size="21" font-weight="700" font-family="Inter,Arial">2024</text><text x="94" y="671" fill="#CBD5E1" font-size="21" font-family="Inter,Arial">Interpretation</text><text x="410" y="671" fill="#FFFFFF" font-size="21" font-weight="700" font-family="Inter,Arial">market shift</text><text x="650" y="473" fill="#CBD5E1" font-size="23" font-family="Inter,Arial">Tesla 2023 peak</text>
+<rect x="650" y="485" width="460" height="18" rx="9" fill="rgba(255,255,255,0.10)"/>
+<rect x="650" y="485" width="460" height="18" rx="9" fill="#F97316"/><text x="650" y="543" fill="#CBD5E1" font-size="23" font-family="Inter,Arial">Renault 2025 acceleration</text>
+<rect x="650" y="555" width="460" height="18" rx="9" fill="rgba(255,255,255,0.10)"/>
+<rect x="650" y="555" width="460" height="18" rx="9" fill="#F97316"/><text x="650" y="613" fill="#CBD5E1" font-size="23" font-family="Inter,Arial">Narrative clarity</text>
+<rect x="650" y="625" width="460" height="18" rx="9" fill="rgba(255,255,255,0.10)"/>
+<rect x="650" y="625" width="423" height="18" rx="9" fill="#F97316"/>
+<text x="70" y="744" fill="#64748B" font-size="20" font-family="Inter,Arial">Raphaël Parmentier · Data · Statistics · AI pedagogy</text>
+</svg>

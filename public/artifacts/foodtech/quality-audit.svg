@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="800" viewBox="0 0 1280 800">
+<defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#080D1C"/><stop offset="0.62" stop-color="#0F172A"/><stop offset="1" stop-color="#111827"/></linearGradient><radialGradient id="glow" cx="50%" cy="0%" r="70%"><stop offset="0" stop-color="#F97316" stop-opacity="0.33"/><stop offset="1" stop-color="#F97316" stop-opacity="0"/></radialGradient></defs>
+<rect width="1280" height="800" fill="url(#bg)"/><rect width="1280" height="800" fill="url(#glow)"/>
+<circle cx="1080" cy="120" r="220" fill="#F97316" opacity="0.08"/>
+<text x="70" y="86" fill="#FB923C" font-size="22" font-weight="700" letter-spacing="6" font-family="Inter,Arial">TEACHING ARTIFACT</text>
+<text x="70" y="145" fill="#FFFFFF" font-size="50" font-weight="750" font-family="Inter,Arial">Operational Data Quality Audit</text>
+<text x="70" y="190" fill="#CBD5E1" font-size="25" font-family="Inter,Arial">FoodTech Expansion Strategy · reproducible cleaning rules</text>
+<rect x="70" y="250" width="220" height="130" rx="22" fill="rgba(255,255,255,0.055)" stroke="rgba(255,255,255,0.12)"/>
+<text x="96" y="288" fill="#94A3B8" font-size="24" font-family="Inter,Arial">Raw rows</text>
+<text x="96" y="342" fill="#FFFFFF" font-size="44" font-weight="700" font-family="Inter,Arial">500</text><rect x="320" y="250" width="220" height="130" rx="22" fill="rgba(255,255,255,0.055)" stroke="rgba(255,255,255,0.12)"/>
+<text x="346" y="288" fill="#94A3B8" font-size="24" font-family="Inter,Arial">Removed</text>
+<text x="346" y="342" fill="#FFFFFF" font-size="44" font-weight="700" font-family="Inter,Arial">14</text><rect x="570" y="250" width="220" height="130" rx="22" fill="rgba(255,255,255,0.055)" stroke="rgba(255,255,255,0.12)"/>
+<text x="596" y="288" fill="#94A3B8" font-size="24" font-family="Inter,Arial">Clean rows</text>
+<text x="596" y="342" fill="#FFFFFF" font-size="44" font-weight="700" font-family="Inter,Arial">486</text><rect x="820" y="250" width="220" height="130" rx="22" fill="rgba(255,255,255,0.055)" stroke="rgba(255,255,255,0.12)"/>
+<text x="846" y="288" fill="#94A3B8" font-size="24" font-family="Inter,Arial">Duplicates</text>
+<text x="846" y="342" fill="#FFFFFF" font-size="44" font-weight="700" font-family="Inter,Arial">4</text><rect x="70" y="450" width="520" height="210" rx="22" fill="rgba(15,23,42,0.75)" stroke="rgba(255,255,255,0.12)"/>
+<text x="94" y="490" fill="#F8FAFC" font-size="26" font-weight="700" font-family="Inter,Arial">Quality controls</text><text x="94" y="534" fill="#CBD5E1" font-size="21" font-family="Inter,Arial">Missing values</text><text x="410" y="534" fill="#FFFFFF" font-size="21" font-weight="700" font-family="Inter,Arial">7</text><text x="94" y="578" fill="#CBD5E1" font-size="21" font-family="Inter,Arial">Delivery outliers</text><text x="410" y="578" fill="#FFFFFF" font-size="21" font-weight="700" font-family="Inter,Arial">2</text><text x="94" y="622" fill="#CBD5E1" font-size="21" font-family="Inter,Arial">Unknown category</text><text x="410" y="622" fill="#FFFFFF" font-size="21" font-weight="700" font-family="Inter,Arial">1</text><text x="650" y="458" fill="#CBD5E1" font-size="23" font-family="Inter,Arial">Dataset retention</text>
+<rect x="650" y="470" width="460" height="18" rx="9" fill="rgba(255,255,255,0.10)"/>
+<rect x="650" y="470" width="447" height="18" rx="9" fill="#F97316"/><text x="650" y="528" fill="#CBD5E1" font-size="23" font-family="Inter,Arial">Traceability coverage</text>
+<rect x="650" y="540" width="460" height="18" rx="9" fill="rgba(255,255,255,0.10)"/>
+<rect x="650" y="540" width="460" height="18" rx="9" fill="#F97316"/><text x="650" y="598" fill="#CBD5E1" font-size="23" font-family="Inter,Arial">Rule-based cleaning</text>
+<rect x="650" y="610" width="460" height="18" rx="9" fill="rgba(255,255,255,0.10)"/>
+<rect x="650" y="610" width="460" height="18" rx="9" fill="#F97316"/>
+<text x="70" y="744" fill="#64748B" font-size="20" font-family="Inter,Arial">Raphaël Parmentier · Data · Statistics · AI pedagogy</text>
+</svg>

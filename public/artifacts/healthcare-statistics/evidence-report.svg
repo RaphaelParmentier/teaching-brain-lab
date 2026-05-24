@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="800" viewBox="0 0 1280 800">
+<defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#080D1C"/><stop offset="0.62" stop-color="#0F172A"/><stop offset="1" stop-color="#111827"/></linearGradient><radialGradient id="glow" cx="50%" cy="0%" r="70%"><stop offset="0" stop-color="#F97316" stop-opacity="0.33"/><stop offset="1" stop-color="#F97316" stop-opacity="0"/></radialGradient></defs>
+<rect width="1280" height="800" fill="url(#bg)"/><rect width="1280" height="800" fill="url(#glow)"/>
+<circle cx="1080" cy="120" r="220" fill="#F97316" opacity="0.08"/>
+<text x="70" y="86" fill="#FB923C" font-size="22" font-weight="700" letter-spacing="6" font-family="Inter,Arial">TEACHING ARTIFACT</text>
+<text x="70" y="145" fill="#FFFFFF" font-size="50" font-weight="750" font-family="Inter,Arial">Clinical Evidence Interpretation Report</text>
+<text x="70" y="190" fill="#CBD5E1" font-size="25" font-family="Inter,Arial">Healthcare Statistical Reasoning · uncertainty and bias-aware conclusion</text>
+<rect x="70" y="250" width="240" height="130" rx="22" fill="rgba(255,255,255,0.055)" stroke="rgba(255,255,255,0.12)"/>
+<text x="96" y="288" fill="#94A3B8" font-size="24" font-family="Inter,Arial">Effect</text>
+<text x="96" y="342" fill="#FFFFFF" font-size="44" font-weight="700" font-family="Inter,Arial">−8.4 min</text><rect x="340" y="250" width="240" height="130" rx="22" fill="rgba(255,255,255,0.055)" stroke="rgba(255,255,255,0.12)"/>
+<text x="366" y="288" fill="#94A3B8" font-size="24" font-family="Inter,Arial">CI95</text>
+<text x="366" y="342" fill="#FFFFFF" font-size="44" font-weight="700" font-family="Inter,Arial">−12.1;−4.7</text><rect x="610" y="250" width="240" height="130" rx="22" fill="rgba(255,255,255,0.055)" stroke="rgba(255,255,255,0.12)"/>
+<text x="636" y="288" fill="#94A3B8" font-size="24" font-family="Inter,Arial">p-value</text>
+<text x="636" y="342" fill="#FFFFFF" font-size="44" font-weight="700" font-family="Inter,Arial"><0.001</text><rect x="880" y="250" width="240" height="130" rx="22" fill="rgba(255,255,255,0.055)" stroke="rgba(255,255,255,0.12)"/>
+<text x="906" y="288" fill="#94A3B8" font-size="24" font-family="Inter,Arial">Decision</text>
+<text x="906" y="342" fill="#FFFFFF" font-size="44" font-weight="700" font-family="Inter,Arial">Cautious</text><rect x="70" y="455" width="560" height="230" rx="22" fill="rgba(15,23,42,0.75)" stroke="rgba(255,255,255,0.12)"/>
+<text x="94" y="495" fill="#F8FAFC" font-size="26" font-weight="700" font-family="Inter,Arial">Evidence checklist</text><text x="94" y="539" fill="#CBD5E1" font-size="21" font-family="Inter,Arial">Appropriate test</text><text x="450" y="539" fill="#FFFFFF" font-size="21" font-weight="700" font-family="Inter,Arial">Welch t-test</text><text x="94" y="583" fill="#CBD5E1" font-size="21" font-family="Inter,Arial">Uncertainty</text><text x="450" y="583" fill="#FFFFFF" font-size="21" font-weight="700" font-family="Inter,Arial">CI95 reported</text><text x="94" y="627" fill="#CBD5E1" font-size="21" font-family="Inter,Arial">Bias discussion</text><text x="450" y="627" fill="#FFFFFF" font-size="21" font-weight="700" font-family="Inter,Arial">selection / confounding</text><text x="94" y="671" fill="#CBD5E1" font-size="21" font-family="Inter,Arial">Conclusion</text><text x="450" y="671" fill="#FFFFFF" font-size="21" font-weight="700" font-family="Inter,Arial">practical + statistical</text><text x="700" y="488" fill="#CBD5E1" font-size="23" font-family="Inter,Arial">Inference quality</text>
+<rect x="700" y="500" width="390" height="18" rx="9" fill="rgba(255,255,255,0.10)"/>
+<rect x="700" y="500" width="370" height="18" rx="9" fill="#F97316"/><text x="700" y="558" fill="#CBD5E1" font-size="23" font-family="Inter,Arial">Bias awareness</text>
+<rect x="700" y="570" width="390" height="18" rx="9" fill="rgba(255,255,255,0.10)"/>
+<rect x="700" y="570" width="335" height="18" rx="9" fill="#F97316"/><text x="700" y="628" fill="#CBD5E1" font-size="23" font-family="Inter,Arial">Communication clarity</text>
+<rect x="700" y="640" width="390" height="18" rx="9" fill="rgba(255,255,255,0.10)"/>
+<rect x="700" y="640" width="351" height="18" rx="9" fill="#F97316"/>
+<text x="70" y="744" fill="#64748B" font-size="20" font-family="Inter,Arial">Raphaël Parmentier · Data · Statistics · AI pedagogy</text>
+</svg>
