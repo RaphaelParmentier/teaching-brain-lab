@@ -3,147 +3,221 @@ export interface LearningStep {
   title: string;
   level: string;
   description: string;
+
   concepts: string[];
   tools: string[];
   projects: string[];
+
   relatedMissionIds: string[];
 }
 
 export const learningPath: LearningStep[] = [
   {
     id: "literacy",
+
     title: "Data Literacy",
+
     level: "Foundation",
+
     description:
-      "Understand datasets, variables, indicators and basic reasoning.",
+      "Understand datasets, variables, indicators and data quality before performing analytical work.",
+
     concepts: [
       "Variables",
       "Data Types",
       "KPIs",
       "Data Quality",
+      "Data Collection",
     ],
+
     tools: [
       "Excel",
       "Google Sheets",
     ],
+
     projects: [
-      "Business Metrics",
+      "FoodTech Expansion Strategy",
     ],
-    relatedMissionIds: ["foodtech"],
+
+    relatedMissionIds: [
+      "foodtech",
+    ],
   },
 
   {
     id: "statistics",
+
     title: "Statistical Thinking",
+
     level: "Intermediate",
+
     description:
-      "Reason under uncertainty and interpret evidence correctly.",
+      "Reason under uncertainty and learn how to correctly interpret evidence, significance and risk.",
+
     concepts: [
       "Sampling",
-      "Inference",
-      "Hypothesis Testing",
       "Confidence Intervals",
+      "Hypothesis Testing",
+      "Bias",
+      "Inference",
     ],
+
     tools: [
       "R",
       "Python",
-      "Jupyter",
+      "Jupyter Notebook",
     ],
+
     projects: [
-      "Healthcare Analytics",
+      "Healthcare Statistical Reasoning",
     ],
-    relatedMissionIds: ["healthcare"],
+
+    relatedMissionIds: [
+      "healthcare-statistics",
+    ],
   },
 
   {
     id: "analytics",
+
     title: "Data Analytics",
+
     level: "Intermediate",
+
     description:
-      "Transform raw data into actionable insights.",
+      "Transform raw data into insights through cleaning, exploration, visualization and storytelling.",
+
     concepts: [
       "EDA",
       "Visualization",
       "Storytelling",
-      "Decision Making",
+      "Data Cleaning",
+      "Reporting",
     ],
+
     tools: [
       "R",
-      "Python",
       "Power BI",
+      "Excel",
+      "ggplot2",
     ],
+
     projects: [
-      "FoodTech Expansion",
+      "European Economic Indicators",
+      "Renault vs Tesla Analytics",
     ],
-    relatedMissionIds: ["foodtech"],
+
+    relatedMissionIds: [
+      "eurostat",
+      "renault-tesla",
+    ],
   },
 
   {
     id: "ml",
+
     title: "Machine Learning",
+
     level: "Advanced",
+
     description:
-      "Build predictive models and evaluate performance.",
+      "Design, train and evaluate predictive models while balancing performance, robustness and interpretability.",
+
     concepts: [
+      "Cross Validation",
+      "Feature Engineering",
       "Classification",
       "Regression",
-      "Validation",
       "Overfitting",
     ],
+
     tools: [
-      "Scikit-Learn",
       "Python",
+      "Scikit-Learn",
+      "Jupyter Notebook",
+      "Pandas",
     ],
+
     projects: [
-      "Predictive Analytics",
+      "Healthcare Prediction",
     ],
-    relatedMissionIds: ["healthcare"],
+
+    relatedMissionIds: [
+      "healthcare-prediction",
+    ],
   },
 
   {
     id: "ai",
-    title: "AI Systems",
+
+    title: "AI-Augmented Workflows",
+
     level: "Advanced",
+
     description:
-      "Use and evaluate modern generative AI systems.",
+      "Leverage modern AI systems to improve productivity, research, content generation and decision-making.",
+
     concepts: [
-      "Prompting",
-      "RAG",
-      "Agents",
+      "Prompt Engineering",
+      "Knowledge Bases",
       "Evaluation",
+      "Human-in-the-Loop",
+      "Workflow Design",
     ],
+
     tools: [
-      "OpenAI",
-      "LangChain",
-      "Vector DB",
+      "ChatGPT",
+      "Claude",
+      "NotebookLM",
+      "Perplexity",
     ],
+
     projects: [
-      "Generative AI Workshop",
+      "AI Assistant Design",
     ],
-    relatedMissionIds: ["genai"],
+
+    relatedMissionIds: [
+      "ai-assistant-design",
+    ],
   },
 
   {
     id: "projects",
+
     title: "Applied Projects",
+
     level: "Professional",
+
     description:
-      "Combine technical skills into real-world deliverables.",
+      "Combine analytical, technical and communication skills to deliver professional-grade solutions.",
+
     concepts: [
       "Problem Solving",
+      "Project Delivery",
       "Communication",
-      "Deployment",
       "Product Thinking",
+      "Presentation",
     ],
+
     tools: [
       "Git",
-      "FastAPI",
-      "Next.js",
+      "Python",
+      "R",
+      "Power BI",
+      "AI Systems",
     ],
+
     projects: [
-      "AI Data Quality Auditor",
-      "Teaching Brain",
+      "All Teaching Missions",
     ],
-    relatedMissionIds: ["foodtech", "healthcare", "genai"],
+
+    relatedMissionIds: [
+      "foodtech",
+      "eurostat",
+      "renault-tesla",
+      "healthcare-statistics",
+      "healthcare-prediction",
+      "ai-assistant-design",
+    ],
   },
 ];
