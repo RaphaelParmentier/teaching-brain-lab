@@ -50,6 +50,48 @@ const semanticRoutes: Record<string, string[]> = {
   ],
 };
 
+const routeDescriptions: Record<
+  string,
+  { label: string; path: string; description: string }
+> = {
+  core: {
+    label: "Teaching System",
+    path: "Learning by doing connects every program.",
+    description:
+      "The central philosophy: students learn by building concrete analytical deliverables.",
+  },
+  "data-strategy": {
+    label: "Data Strategy Route",
+    path: "Raw Data → Cleaning → KPIs → Decision Support",
+    description:
+      "Students learn how to turn messy data into structured business recommendations.",
+  },
+  "statistical-reasoning": {
+    label: "Statistical Reasoning Route",
+    path: "Data Strategy → Statistical Reasoning → Machine Learning",
+    description:
+      "Students learn to interpret evidence, uncertainty and bias before building models.",
+  },
+  "ml-strategy": {
+    label: "Machine Learning Route",
+    path: "Statistics → Model Training → Validation → Interpretation",
+    description:
+      "Students learn how predictive models are trained, evaluated and explained.",
+  },
+  "ai-workflows": {
+    label: "AI Workflow Route",
+    path: "Machine Learning → LLMs → AI Assistants → Evaluation",
+    description:
+      "Students learn how modern AI systems work and how to use them responsibly.",
+  },
+  communication: {
+    label: "Communication Route",
+    path: "Analysis → Report → Presentation → Decision",
+    description:
+      "Students learn to transform technical work into clear professional deliverables.",
+  },
+};
+
 function getCurve(from: Position, to: Position, kind: string) {
   const midX = (from.x + to.x) / 2;
   const midY = (from.y + to.y) / 2;
@@ -245,15 +287,20 @@ export default function BrainCanvas() {
           />
         ))}
 
-        <div className="absolute bottom-10 left-[37%] z-20 rounded-2xl border border-orange-400/20 bg-[#080D1C]/80 px-5 py-4 text-xs text-slate-300 backdrop-blur-xl">
-          <p className="font-bold uppercase tracking-[0.26em] text-orange-300">
-            Pedagogical route
+        <div className="absolute bottom-10 left-1/2 z-20 w-[560px] -translate-x-1/2 rounded-[1.5rem] border border-orange-400/25 bg-[#080D1C]/90 px-7 py-5 text-slate-300 shadow-[0_0_55px_rgba(0,0,0,0.65)] backdrop-blur-xl">
+          <p
+            className="text-sm font-bold uppercase tracking-[0.28em]"
+            style={{ color: activeColor }}
+          >
+            {routeDescriptions[activeNodeId]?.label}
           </p>
-          <p className="mt-2 leading-6">
-            Data Strategy → Statistical Reasoning → Machine Learning → AI Workflows
+
+          <p className="mt-3 text-lg font-semibold leading-7 text-white">
+            {routeDescriptions[activeNodeId]?.path}
           </p>
-          <p className="mt-1 leading-6 text-slate-400">
-            Professional Communication supports every stage.
+
+          <p className="mt-2 text-base leading-7 text-slate-400">
+            {routeDescriptions[activeNodeId]?.description}
           </p>
         </div>
       </div>
