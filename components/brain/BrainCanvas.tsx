@@ -194,6 +194,7 @@ export default function BrainCanvas() {
       </div>
 
       <ReactFlow
+        className="relative z-[5]"
         nodes={nodes}
         edges={edges}
         defaultViewport={{ x: 1350, y: 400, zoom: 1.2 }}
