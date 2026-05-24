@@ -9,15 +9,6 @@ import type { BrainNodeData } from "@/data/brain-nodes";
 import BrainPanel from "@/components/brain/BrainPanel";
 import LearningJourney from "@/components/journey/LearningJourney";
 
-const categoryLabels: Record<string, string> = {
-  core: "Core identity",
-  teaching: "Teaching",
-  data: "Data",
-  ai: "AI",
-  development: "Development",
-  domain: "Domain expertise",
-};
-
 const graphOffset = { x: 0, y: 135 };
 const graphScale = 1.9;
 
@@ -39,7 +30,7 @@ const routes: Record<string, string[]> = {
 export default function BrainCanvas() {
   const [selectedNode, setSelectedNode] = useState<BrainNodeData | null>(
     brainNodes[0]
-  );  
+  );
   const [mouse, setMouse] = useState({ x: 1200, y: 420 });
 
   const activeNodeId = selectedNode?.id ?? null;
@@ -60,52 +51,49 @@ export default function BrainCanvas() {
           targetPosition: Position.Left,
           data: {
             label: (
-              <div
-                className="group min-w-[360px] rounded-[2rem] border bg-[#080D1C]/96 px-9 py-8 backdrop-blur-xl transition-shadow duration-300"
-                style={{
-                  borderColor: isActive ? `${node.color}88` : `${node.color}33`,
-                  boxShadow: isActive
-                    ? `0 0 90px ${node.color}44, 0 0 140px ${node.color}22, 0 0 65px rgba(0,0,0,0.9)`
-                    : `0 0 45px rgba(0,0,0,0.72), 0 0 30px ${node.color}10`,
-                }}
+              <button
+                type="button"
+                className="group relative flex h-28 w-28 items-center justify-center rounded-full"
+                aria-label={node.label}
               >
-                <div
-                  className="mb-5 h-3.5 w-3.5 rounded-full"
+                <span
+                  className="absolute h-28 w-28 rounded-full opacity-25 blur-2xl transition duration-300"
                   style={{
                     backgroundColor: node.color,
-                    boxShadow: `0 0 28px ${node.color}`,
+                    opacity: isActive ? 0.55 : 0.22,
                   }}
                 />
 
-                <p
-                  className="text-sm font-bold uppercase tracking-[0.38em]"
+                <span
+                  className="absolute h-16 w-16 rounded-full border transition duration-300"
+                  style={{
+                    borderColor: isActive ? `${node.color}AA` : `${node.color}55`,
+                    backgroundColor: `${node.color}14`,
+                    boxShadow: isActive
+                      ? `0 0 38px ${node.color}AA, inset 0 0 24px ${node.color}35`
+                      : `0 0 18px ${node.color}55, inset 0 0 18px ${node.color}20`,
+                  }}
+                />
+
+                <span
+                  className="relative h-4 w-4 rounded-full transition duration-300"
+                  style={{
+                    backgroundColor: node.color,
+                    boxShadow: `0 0 24px ${node.color}`,
+                  }}
+                />
+
+                <span className="absolute top-[78px] w-[220px] text-center text-lg font-semibold tracking-[-0.04em] text-white">
+                  {node.label}
+                </span>
+
+                <span
+                  className="absolute top-[108px] w-[220px] text-center text-xs font-bold uppercase tracking-[0.24em]"
                   style={{ color: node.color }}
                 >
-                  {categoryLabels[node.category]}
-                </p>
-
-                <p className="mt-4 text-[2rem] font-semibold leading-[1.02] tracking-[-0.055em] text-white">
-                  {node.label}
-                </p>
-
-                {node.skills && (
-                  <div className="mt-6 flex flex-wrap gap-2.5">
-                    {node.skills.slice(0, 3).map((skill) => (
-                      <span
-                        key={skill}
-                        className="rounded-full border px-3.5 py-1.5 text-xs font-semibold"
-                        style={{
-                          borderColor: `${node.color}42`,
-                          backgroundColor: `${node.color}18`,
-                          color: node.color,
-                        }}
-                      >
-                        {skill}
-                      </span>
-                    ))}
-                  </div>
-                )}
-              </div>
+                  Click to explore
+                </span>
+              </button>
             ),
           },
           style: {
@@ -137,7 +125,7 @@ export default function BrainCanvas() {
       style: {
         stroke: isActive
           ? "rgba(125, 211, 252, 1)"
-          : "rgba(125, 211, 252, 0.18)",
+          : "rgba(125, 211, 252, 0.16)",
         strokeWidth: isActive ? 5 : 1.5,
         strokeDasharray: "8 8",
         filter: isActive
@@ -177,6 +165,9 @@ export default function BrainCanvas() {
       />
 
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(0,0,0,0.25)_60%,rgba(0,0,0,0.92)_100%)]" />
+
+      <div className="pointer-events-none absolute left-[35%] top-[12%] h-[70vh] w-[42vw] rounded-[50%] border border-white/5 opacity-30 blur-[1px]" />
+      <div className="pointer-events-none absolute left-[41%] top-[18%] h-[54vh] w-[30vw] rounded-[50%] border border-orange-300/10 opacity-40 blur-[2px]" />
 
       <div className="absolute left-12 top-10 z-10 max-w-[560px]">
         <div className="inline-flex items-center gap-3 rounded-full border border-orange-400/30 bg-orange-400/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.3em] text-orange-300 shadow-[0_0_35px_rgba(249,115,22,0.18)]">
