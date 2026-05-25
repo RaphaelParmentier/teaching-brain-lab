@@ -82,22 +82,6 @@ export default function BrainPanel({ selectedNode }: BrainPanelProps) {
         </div>
       )}
 
-      {selectedNode.courses && (
-        <div className="mt-9">
-          <p className="text-xs font-bold uppercase tracking-[0.3em] text-slate-400">
-            Courses
-          </p>
-
-          <ul className="mt-4 grid grid-cols-1 gap-2 text-[0.95rem] text-slate-300">
-            {selectedNode.courses.map((course) => (
-              <li key={course} className="rounded-xl border border-white/10 bg-white/5 px-4 py-2">
-                {course}
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
-
       {selectedNode.topics && (
         <div className="mt-9">
           <p className="text-xs font-bold uppercase tracking-[0.3em] text-slate-400">
