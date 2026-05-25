@@ -95,7 +95,7 @@ export default function BrainPanel({ selectedNode }: BrainPanelProps) {
 
   return (
     <aside
-      className="absolute bottom-10 right-8 z-30 w-[600px] max-h-[60vh] overflow-y-auto rounded-[2rem] border border-white/10 bg-[#080D1C]/95 p-8 shadow-[0_0_70px_rgba(0,0,0,0.75)] backdrop-blur-xl"
+      className="absolute bottom-10 right-10 z-30 w-[clamp(600px,32vw,760px)] max-h-[62vh] overflow-y-auto rounded-[2.25rem] border border-white/10 bg-[#080D1C]/95 p-10 shadow-[0_0_80px_rgba(0,0,0,0.78)] backdrop-blur-xl"
       style={{
         borderColor: `${selectedNode.color}35`,
         boxShadow: `0 0 80px rgba(0,0,0,0.72), 0 0 52px ${selectedNode.color}18`,
@@ -118,15 +118,15 @@ export default function BrainPanel({ selectedNode }: BrainPanelProps) {
         </p>
       </div>
 
-      <h2 className="mt-5 text-4xl font-semibold tracking-[-0.055em] text-white">
+      <h2 className="mt-6 text-[clamp(2.5rem,2.2vw,3.6rem)] font-semibold tracking-[-0.06em] text-white">
         {copy.title}
       </h2>
 
-      <p className="mt-5 text-lg leading-8 text-slate-300">
+      <p className="mt-6 text-[clamp(1.15rem,1vw,1.45rem)] leading-[1.65] text-slate-300">
         {copy.description}
       </p>
 
-      <ul className="mt-7 space-y-4 text-base leading-7 text-slate-300">
+      <ul className="mt-8 space-y-4 text-[clamp(1rem,0.85vw,1.25rem)] leading-8 text-slate-300">
         {copy.bullets.map((bullet) => (
           <li key={bullet} className="flex items-start gap-3">
             <span
@@ -145,7 +145,7 @@ export default function BrainPanel({ selectedNode }: BrainPanelProps) {
         {copy.tags.map((tag) => (
           <span
             key={tag}
-            className="rounded-full border px-5 py-2 text-sm font-semibold"
+            className="rounded-full border px-5 py-2.5 text-[clamp(0.9rem,0.75vw,1.05rem)] font-semibold"
             style={{
               borderColor: `${selectedNode.color}42`,
               backgroundColor: `${selectedNode.color}18`,

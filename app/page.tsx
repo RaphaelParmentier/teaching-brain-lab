@@ -4,11 +4,11 @@ import ResponsiveTeachingLab from "@/components/responsive/ResponsiveTeachingLab
 export default function Home() {
   return (
     <>
-      <div className="hidden 2xl:block">
+      <div className="hidden min-[1800px]:block">
         <BrainCanvas />
       </div>
 
-      <div className="block 2xl:hidden">
+      <div className="block min-[1800px]:hidden">
         <ResponsiveTeachingLab />
       </div>
     </>
