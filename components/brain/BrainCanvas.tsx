@@ -151,7 +151,21 @@ export default function BrainCanvas() {
           RP Systems • Teaching
         </div>
 
-        <h1 className="mt-7 max-w-[760px] text-[clamp(5.2rem,5.3vw,8.8rem)] font-semibold leading-[0.88] tracking-[-0.075em] text-white">
+        <h1
+          className="
+            mt-7
+            max-w-[760px]
+            text-5xl
+            sm:text-6xl
+            md:text-7xl
+            xl:text-8xl
+            2xl:text-[8.5rem]
+            font-semibold
+            leading-[0.9]
+            tracking-[-0.075em]
+            text-white
+          "
+        >
           Teaching data and AI through real projects.
         </h1>
 
@@ -162,8 +176,8 @@ export default function BrainCanvas() {
         </p>
         <div className="mt-8 max-w-sm">
           <LearningJourney onOpen={() => setSelectedNode(null)} />
-          <p className="mt-7 max-w-[560px] text-[clamp(1.1rem,0.95vw,1.45rem)] leading-[1.55] text-slate-400">
-            Explore the programs, missions and student work behind this learning system.
+          <p className="mt-7 max-w-[560px] text-lg leading-8 text-slate-300">
+            Explore real student projects, analytical workflows and professional deliverables.
           </p>
         </div>
       </div>
@@ -287,25 +301,34 @@ export default function BrainCanvas() {
           />
         ))}
 
-        <div className="absolute bottom-10 left-1/2 z-20 w-[560px] -translate-x-1/2 rounded-[1.5rem] border border-orange-400/25 bg-[#080D1C]/90 px-7 py-5 text-slate-300 shadow-[0_0_55px_rgba(0,0,0,0.65)] backdrop-blur-xl">
+        <div
+          className="absolute bottom-10 left-1/2 z-20 w-[clamp(460px,32vw,620px)] -translate-x-1/2 rounded-[1.5rem] border bg-[#080D1C]/92 p-5 shadow-[0_0_50px_rgba(0,0,0,0.7)] backdrop-blur-xl"
+          style={{
+            borderColor: `${activeColor}45`,
+            boxShadow: `0 0 55px rgba(0,0,0,0.72), 0 0 34px ${activeColor}18`,
+          }}
+        >
           <p
-            className="text-sm font-bold uppercase tracking-[0.28em]"
+            className="text-xs font-bold uppercase tracking-[0.28em]"
             style={{ color: activeColor }}
           >
-            {routeDescriptions[activeNodeId]?.label}
+            {routeDescriptions[activeNodeId].label}
           </p>
 
-          <p className="mt-3 text-lg font-semibold leading-7 text-white">
-            {routeDescriptions[activeNodeId]?.path}
+          <p className="mt-3 text-base font-semibold leading-6 text-white">
+            {routeDescriptions[activeNodeId].path}
           </p>
 
-          <p className="mt-2 text-base leading-7 text-slate-400">
-            {routeDescriptions[activeNodeId]?.description}
+          <p className="mt-2 text-sm leading-6 text-slate-400">
+            {routeDescriptions[activeNodeId].description}
           </p>
         </div>
       </div>
 
-      <BrainPanel selectedNode={selectedNode} />
+      <BrainPanel
+        selectedNode={selectedNode}
+        onClose={() => setSelectedNode(null)}
+      />
     </section>
   );
 }
@@ -371,12 +394,12 @@ function NeuralNode({
         )}
       </span>
 
-      <span className="mt-4 text-[clamp(1.35rem,1.2vw,2rem)] font-semibold leading-tight tracking-[-0.045em] text-white drop-shadow-[0_0_14px_rgba(0,0,0,0.95)]">
+      <span className="mt-4 max-w-[220px] text-center text-[clamp(1rem,0.95vw,1.45rem)] font-semibold leading-[1.05] tracking-[-0.035em] text-white drop-shadow-[0_0_12px_rgba(0,0,0,0.95)]">
         {node.label}
       </span>
 
       <span
-        className="mt-2 text-[clamp(0.75rem,0.62vw,1rem)] font-bold uppercase tracking-[0.28em]"
+        className="mt-2 text-[clamp(0.65rem,0.5vw,0.85rem)] font-bold uppercase tracking-[0.28em]"
         style={{ color: node.color }}
       >
         Click to explore

@@ -2,6 +2,7 @@ import { BrainNodeData } from "@/data/brain-nodes";
 
 type BrainPanelProps = {
   selectedNode: BrainNodeData | null;
+  onClose: () => void;
 };
 
 const panelCopy: Record<
@@ -81,7 +82,7 @@ const panelCopy: Record<
   },
 };
 
-export default function BrainPanel({ selectedNode }: BrainPanelProps) {
+export default function BrainPanel({ selectedNode, onClose }: BrainPanelProps) {
   if (!selectedNode) {
     return null;
   }
@@ -95,13 +96,23 @@ export default function BrainPanel({ selectedNode }: BrainPanelProps) {
 
   return (
     <aside
+      onClick={(event) => event.stopPropagation()}
       className="absolute bottom-10 right-10 z-30 w-[clamp(600px,32vw,760px)] max-h-[62vh] overflow-y-auto rounded-[2.25rem] border border-white/10 bg-[#080D1C]/95 p-10 shadow-[0_0_80px_rgba(0,0,0,0.78)] backdrop-blur-xl"
       style={{
         borderColor: `${selectedNode.color}35`,
         boxShadow: `0 0 80px rgba(0,0,0,0.72), 0 0 52px ${selectedNode.color}18`,
       }}
     >
-      <div className="flex items-center gap-3">
+      <button
+        type="button"
+        onClick={onClose}
+        aria-label="Close panel"
+        className="absolute right-6 top-6 flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/5 text-lg text-slate-400 transition hover:border-white/20 hover:bg-white/10 hover:text-white"
+      >
+        ×
+      </button>
+
+      <div className="flex items-center gap-3 pr-12">
         <span
           className="h-4 w-4 rounded-full"
           style={{
@@ -118,7 +129,7 @@ export default function BrainPanel({ selectedNode }: BrainPanelProps) {
         </p>
       </div>
 
-      <h2 className="mt-6 text-[clamp(2.5rem,2.2vw,3.6rem)] font-semibold tracking-[-0.06em] text-white">
+      <h2 className="mt-6 pr-12 text-[clamp(2.5rem,2.2vw,3.6rem)] font-semibold tracking-[-0.06em] text-white">
         {copy.title}
       </h2>
 
@@ -130,7 +141,7 @@ export default function BrainPanel({ selectedNode }: BrainPanelProps) {
         {copy.bullets.map((bullet) => (
           <li key={bullet} className="flex items-start gap-3">
             <span
-              className="mt-2.5 h-2 w-2 shrink-0 rounded-full"
+              className="mt-3 h-2 w-2 shrink-0 rounded-full"
               style={{
                 backgroundColor: selectedNode.color,
                 boxShadow: `0 0 14px ${selectedNode.color}`,

@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 
 import { learningPhilosophy } from "@/data/learning-philosophy";
 import { teachingMissions } from "@/data/teaching-missions";
+import type { TeachingMission } from "@/data/teaching-missions";
 import { teachingPrograms } from "@/data/teaching-programs";
 import MissionOutputModal from "@/components/journey/MissionOutputModal";
 
@@ -11,7 +12,8 @@ export default function ResponsiveTeachingLab() {
   const [selectedProgramId, setSelectedProgramId] = useState(
     teachingPrograms[0].id,
   );
-  const [selectedMission, setSelectedMission] = useState<any | null>(null);
+  const [selectedMission, setSelectedMission] =
+    useState<TeachingMission | null>(null);
 
   const selectedProgram = useMemo(
     () =>
@@ -43,20 +45,17 @@ export default function ResponsiveTeachingLab() {
             Teaching data and AI through real projects.
           </h1>
 
-          <div className="mt-6 flex flex-wrap gap-2">
-            <Badge>Data</Badge>
-            <Badge>Statistics</Badge>
-            <Badge>Machine Learning</Badge>
-            <Badge>AI Workflows</Badge>
-            <Badge>Student outputs</Badge>
-          </div>
+          <p className="mt-6 max-w-2xl text-base leading-7 text-slate-300 sm:text-lg">
+            Students learn by cleaning data, building analyses, comparing
+            models and explaining decisions.
+          </p>
         </div>
       </section>
 
       <section className="mx-auto max-w-5xl px-5 pb-20 sm:px-8 lg:px-12">
         <section className="rounded-[2rem] border border-white/10 bg-white/[0.04] p-5 shadow-[0_0_70px_rgba(0,0,0,0.55)] sm:p-7">
           <p className="text-xs font-bold uppercase tracking-[0.26em] text-orange-300">
-            Teaching Program
+            Choose a program
           </p>
 
           <select
@@ -75,22 +74,29 @@ export default function ResponsiveTeachingLab() {
             {selectedProgram.title}
           </h2>
 
-          <div className="mt-6 grid gap-3 sm:grid-cols-3">
-            <InfoCard title="Level" value={selectedProgram.level} />
-            <InfoCard title="Format" value={selectedProgram.format} />
-            <InfoCard title="Profile" value={selectedProgram.entryProfile} />
+          <p className="mt-4 text-base leading-7 text-slate-300 sm:text-lg">
+            {selectedProgram.tagline}
+          </p>
+
+          <div className="mt-6 rounded-2xl border border-orange-400/15 bg-orange-400/10 p-5">
+            <p className="text-xs font-bold uppercase tracking-[0.22em] text-orange-300">
+              During the course
+            </p>
+            <p className="mt-3 text-sm leading-7 text-slate-200">
+              {selectedProgram.objective}
+            </p>
           </div>
 
           <div className="mt-6 grid gap-4 lg:grid-cols-3">
-            <ChipBlock title="Skills" items={selectedProgram.skills} />
-            <ChipBlock title="Concepts" items={selectedProgram.concepts} />
-            <ChipBlock title="Tools" items={selectedProgram.tools} />
+            <ChipBlock title="Practiced skills" items={selectedProgram.skills} />
+            <ChipBlock title="Key ideas" items={selectedProgram.concepts} />
+            <ChipBlock title="Tools used" items={selectedProgram.tools} />
           </div>
         </section>
 
         <section className="mt-10">
           <p className="text-xs font-bold uppercase tracking-[0.26em] text-orange-300">
-            Missions
+            What students build
           </p>
 
           <div className="mt-5 grid gap-5 md:grid-cols-2">
@@ -105,7 +111,7 @@ export default function ResponsiveTeachingLab() {
                   </span>
 
                   <span className="text-xs uppercase tracking-[0.16em] text-slate-400">
-                    {mission.level}
+                    {mission.duration}
                   </span>
                 </div>
 
@@ -113,11 +119,9 @@ export default function ResponsiveTeachingLab() {
                   {mission.title}
                 </h3>
 
-                <div className="mt-5 flex flex-wrap gap-2">
-                  {mission.skills.slice(0, 4).map((skill) => (
-                    <Badge key={skill}>{skill}</Badge>
-                  ))}
-                </div>
+                <p className="mt-4 text-sm leading-7 text-slate-300">
+                  {mission.context}
+                </p>
 
                 <div className="mt-6">
                   <p className="text-xs font-bold uppercase tracking-[0.22em] text-orange-300">
@@ -151,7 +155,7 @@ export default function ResponsiveTeachingLab() {
 
         <section className="mt-12">
           <p className="text-xs font-bold uppercase tracking-[0.26em] text-cyan-200">
-            Teaching Philosophy
+            How I teach
           </p>
 
           <div className="mt-5 grid gap-5 md:grid-cols-3">
@@ -163,6 +167,9 @@ export default function ResponsiveTeachingLab() {
                 <h3 className="text-xl font-semibold tracking-[-0.04em] text-white">
                   {item.title}
                 </h3>
+                <p className="mt-3 text-sm leading-6 text-slate-300">
+                  {item.description}
+                </p>
               </article>
             ))}
           </div>
@@ -179,17 +186,6 @@ export default function ResponsiveTeachingLab() {
   );
 }
 
-function InfoCard({ title, value }: { title: string; value: string }) {
-  return (
-    <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
-      <p className="text-xs font-bold uppercase tracking-[0.2em] text-slate-400">
-        {title}
-      </p>
-      <p className="mt-2 text-sm leading-6 text-slate-200">{value}</p>
-    </div>
-  );
-}
-
 function ChipBlock({ title, items }: { title: string; items: string[] }) {
   return (
     <div className="rounded-2xl border border-white/10 bg-white/5 p-5">
@@ -199,17 +195,14 @@ function ChipBlock({ title, items }: { title: string; items: string[] }) {
 
       <div className="mt-4 flex flex-wrap gap-2">
         {items.slice(0, 6).map((item) => (
-          <Badge key={item}>{item}</Badge>
+          <span
+            key={item}
+            className="rounded-full border border-cyan-400/25 bg-cyan-400/10 px-3 py-1 text-xs font-semibold text-cyan-200"
+          >
+            {item}
+          </span>
         ))}
       </div>
     </div>
-  );
-}
-
-function Badge({ children }: { children: React.ReactNode }) {
-  return (
-    <span className="rounded-full border border-cyan-400/25 bg-cyan-400/10 px-3 py-1 text-xs font-semibold text-cyan-200">
-      {children}
-    </span>
   );
 }
