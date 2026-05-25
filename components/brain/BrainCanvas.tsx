@@ -155,14 +155,14 @@ export default function BrainCanvas() {
           Teaching data and AI through real projects.
         </h1>
 
-        <p className="mt-7 max-w-[430px] text-base md:text-lg xl:text-xl leading-7 text-slate-300">
+        <p className="mt-7 max-w-[520px] text-lg leading-8 text-slate-300">
           A learning-by-doing architecture where data foundations, statistical
           reasoning, machine learning and AI workflows connect into professional
           deliverables.
         </p>
         <div className="mt-8 max-w-sm">
           <LearningJourney onOpen={() => setSelectedNode(null)} />
-          <p className="mt-7 max-w-[430px] text-base md:text-lg xl:text-xl leading-7 text-slate-500">
+          <p className="mt-6 max-w-[460px] text-base leading-7 text-slate-300">
             Explore the programs, missions and student work behind this learning system.
           </p>
         </div>
@@ -371,12 +371,12 @@ function NeuralNode({
         )}
       </span>
 
-      <span className="mt-4 text-xl font-semibold leading-tight tracking-[-0.04em] text-white drop-shadow-[0_0_10px_rgba(0,0,0,0.9)]">
+      <span className="mt-4 text-2xl font-semibold leading-tight tracking-[-0.045em] text-white drop-shadow-[0_0_12px_rgba(0,0,0,0.95)]">
         {node.label}
       </span>
 
       <span
-        className="mt-2 text-xs font-bold uppercase tracking-[0.24em]"
+        className="mt-2 text-sm font-bold uppercase tracking-[0.24em]"
         style={{ color: node.color }}
       >
         Click to explore

@@ -4,14 +4,98 @@ type BrainPanelProps = {
   selectedNode: BrainNodeData | null;
 };
 
+const panelCopy: Record<
+  string,
+  {
+    title: string;
+    description: string;
+    bullets: string[];
+    tags: string[];
+  }
+> = {
+  core: {
+    title: "How I teach",
+    description:
+      "Students learn by solving realistic data problems, not by watching theory passively.",
+    bullets: [
+      "Start from a concrete business or analytical question.",
+      "Build the workflow step by step with practical tools.",
+      "Finish with something students can explain and defend.",
+    ],
+    tags: ["Real projects", "Workflows", "Student outputs"],
+  },
+  "data-strategy": {
+    title: "From messy data to decisions",
+    description:
+      "Students clean datasets, build indicators and turn analysis into recommendations.",
+    bullets: [
+      "Structure raw files into usable datasets.",
+      "Build KPIs that support a real decision.",
+      "Explain what the numbers mean in plain language.",
+    ],
+    tags: ["Data cleaning", "KPIs", "Decision support"],
+  },
+  "statistical-reasoning": {
+    title: "Thinking with evidence",
+    description:
+      "Students learn how to question results, interpret uncertainty and avoid misleading conclusions.",
+    bullets: [
+      "Understand what the data can and cannot prove.",
+      "Use statistical tests without overclaiming.",
+      "Communicate uncertainty clearly.",
+    ],
+    tags: ["Inference", "Bias", "Uncertainty"],
+  },
+  "ml-strategy": {
+    title: "Building trustworthy models",
+    description:
+      "Students train predictive models, compare approaches and understand why a model works or fails.",
+    bullets: [
+      "Prepare features and split data correctly.",
+      "Compare models with meaningful metrics.",
+      "Explain performance, limits and trade-offs.",
+    ],
+    tags: ["Validation", "Evaluation", "Interpretability"],
+  },
+  "ai-workflows": {
+    title: "Using AI professionally",
+    description:
+      "Students learn how modern AI systems work and how to integrate them into useful workflows.",
+    bullets: [
+      "Understand prompts, context and model limitations.",
+      "Design AI-assisted workflows for real tasks.",
+      "Evaluate outputs instead of trusting them blindly.",
+    ],
+    tags: ["Prompting", "RAG", "Evaluation"],
+  },
+  communication: {
+    title: "Turning analysis into action",
+    description:
+      "Students learn how to present findings clearly and support decisions with evidence.",
+    bullets: [
+      "Adapt the message to the audience.",
+      "Separate results, interpretation and recommendation.",
+      "Turn technical work into a professional deliverable.",
+    ],
+    tags: ["Storytelling", "Reporting", "Decision support"],
+  },
+};
+
 export default function BrainPanel({ selectedNode }: BrainPanelProps) {
   if (!selectedNode) {
     return null;
   }
 
+  const copy = panelCopy[selectedNode.id] ?? {
+    title: selectedNode.label,
+    description: selectedNode.description,
+    bullets: selectedNode.missions ?? [],
+    tags: selectedNode.skills ?? selectedNode.topics ?? [],
+  };
+
   return (
     <aside
-      className="absolute bottom-10 right-[0vw] z-30 w-[560px] max-h-[58vh] overflow-y-auto rounded-[2rem] border border-white/10 bg-[#080D1C]/95 p-8 shadow-[0_0_70px_rgba(0,0,0,0.75)] backdrop-blur-xl"
+      className="absolute bottom-10 right-8 z-30 w-[600px] max-h-[60vh] overflow-y-auto rounded-[2rem] border border-white/10 bg-[#080D1C]/95 p-8 shadow-[0_0_70px_rgba(0,0,0,0.75)] backdrop-blur-xl"
       style={{
         borderColor: `${selectedNode.color}35`,
         boxShadow: `0 0 80px rgba(0,0,0,0.72), 0 0 52px ${selectedNode.color}18`,
@@ -19,14 +103,15 @@ export default function BrainPanel({ selectedNode }: BrainPanelProps) {
     >
       <div className="flex items-center gap-3">
         <span
-          className="h-3.5 w-3.5 rounded-full"
+          className="h-4 w-4 rounded-full"
           style={{
             backgroundColor: selectedNode.color,
             boxShadow: `0 0 24px ${selectedNode.color}`,
           }}
         />
+
         <p
-          className="text-xs font-bold uppercase tracking-[0.34em]"
+          className="text-sm font-bold uppercase tracking-[0.32em]"
           style={{ color: selectedNode.color }}
         >
           {selectedNode.category}
@@ -34,77 +119,43 @@ export default function BrainPanel({ selectedNode }: BrainPanelProps) {
       </div>
 
       <h2 className="mt-5 text-4xl font-semibold tracking-[-0.055em] text-white">
-        {selectedNode.label}
+        {copy.title}
       </h2>
 
-      <p className="mt-5 text-base leading-7 text-slate-300">
-        {selectedNode.description}
+      <p className="mt-5 text-lg leading-8 text-slate-300">
+        {copy.description}
       </p>
 
-      {selectedNode.skills && (
-        <div className="mt-7 flex flex-wrap gap-2.5">
-          {selectedNode.skills.map((skill) => (
+      <ul className="mt-7 space-y-4 text-base leading-7 text-slate-300">
+        {copy.bullets.map((bullet) => (
+          <li key={bullet} className="flex items-start gap-3">
             <span
-              key={skill}
-              className="rounded-full border px-4 py-1.5 text-xs font-semibold"
+              className="mt-2.5 h-2 w-2 shrink-0 rounded-full"
               style={{
-                borderColor: `${selectedNode.color}42`,
-                backgroundColor: `${selectedNode.color}18`,
-                color: selectedNode.color,
+                backgroundColor: selectedNode.color,
+                boxShadow: `0 0 14px ${selectedNode.color}`,
               }}
-            >
-              {skill}
-            </span>
-          ))}
-        </div>
-      )}
+            />
+            <span>{bullet}</span>
+          </li>
+        ))}
+      </ul>
 
-      {selectedNode.missions && (
-        <div className="mt-9">
-          <p className="text-xs font-bold uppercase tracking-[0.3em] text-slate-400">
-            Teaching Missions
-          </p>
-
-          <ul className="mt-4 space-y-3.5 text-[0.95rem] leading-7 text-slate-300">
-            {selectedNode.missions.map((mission) => (
-              <li key={mission} className="flex items-start gap-3">
-                <span
-                  className="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full"
-                  style={{
-                    backgroundColor: selectedNode.color,
-                    boxShadow: `0 0 14px ${selectedNode.color}`,
-                  }}
-                />
-                <span>{mission}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
-
-      {selectedNode.topics && (
-        <div className="mt-9">
-          <p className="text-xs font-bold uppercase tracking-[0.3em] text-slate-400">
-            Related Topics
-          </p>
-
-          <div className="mt-4 flex flex-wrap gap-2.5">
-            {selectedNode.topics.map((topic) => (
-              <span
-                key={topic}
-                className="rounded-full border px-4 py-1.5 text-xs font-semibold"
-                style={{
-                  borderColor: `${selectedNode.color}42`,
-                  backgroundColor: `${selectedNode.color}18`,
-                  color: selectedNode.color,
-                }}
-              >
-                {topic}
-              </span>
-            ))}
-          </div>
-        </div>
-      )}
+      <div className="mt-8 flex flex-wrap gap-3">
+        {copy.tags.map((tag) => (
+          <span
+            key={tag}
+            className="rounded-full border px-5 py-2 text-sm font-semibold"
+            style={{
+              borderColor: `${selectedNode.color}42`,
+              backgroundColor: `${selectedNode.color}18`,
+              color: selectedNode.color,
+            }}
+          >
+            {tag}
+          </span>
+        ))}
+      </div>
     </aside>
   );
 }
