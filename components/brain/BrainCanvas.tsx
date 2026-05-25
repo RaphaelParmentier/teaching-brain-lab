@@ -152,50 +152,19 @@ export default function BrainCanvas() {
         </div>
 
         <h1 className="mt-7 max-w-[520px] text-[4.6rem] font-semibold leading-[0.9] tracking-[-0.065em] text-white">
-          Designing learning systems with data, AI and scientific rigor.
+          Teaching data and AI through real projects.
         </h1>
 
-        <p className="mt-7 max-w-[430px] text-base leading-7 text-slate-300">
+        <p className="mt-7 max-w-[430px] text-base md:text-lg xl:text-xl leading-7 text-slate-300">
           A learning-by-doing architecture where data foundations, statistical
           reasoning, machine learning and AI workflows connect into professional
           deliverables.
         </p>
-        <div className="mt-8 max-w-md">
-          <p className="mb-4 text-sm leading-6 text-slate-300">
-            Explore real teaching programs, applied learning missions and realistic
-            student deliverables built around Data Science, Statistics, Machine
-            Learning and AI workflows.
-          </p>
-
+        <div className="mt-8 max-w-sm">
           <LearningJourney onOpen={() => setSelectedNode(null)} />
-
-          <div className="mt-5 rounded-2xl border border-orange-400/15 bg-orange-400/5 p-4">
-            <div className="flex flex-wrap gap-2">
-              <span className="rounded-full border border-orange-400/20 bg-orange-400/10 px-3 py-1 text-xs font-semibold text-orange-200">
-                6 Teaching Missions
-              </span>
-
-              <span className="rounded-full border border-cyan-400/20 bg-cyan-400/10 px-3 py-1 text-xs font-semibold text-cyan-200">
-                Student Deliverables
-              </span>
-
-              <span className="rounded-full border border-cyan-400/20 bg-cyan-400/10 px-3 py-1 text-xs font-semibold text-cyan-200">
-                RMarkdown Workflows
-              </span>
-
-              <span className="rounded-full border border-cyan-400/20 bg-cyan-400/10 px-3 py-1 text-xs font-semibold text-cyan-200">
-                Data & AI Projects
-              </span>
-            </div>
-
-            <div className="mt-4 space-y-2 text-sm text-slate-300">
-              <p>✓ FoodTech Expansion Strategy</p>
-              <p>✓ European Economic Indicators</p>
-              <p>✓ Renault vs Tesla Analytics</p>
-              <p>✓ Healthcare Prediction</p>
-              <p>✓ AI Assistant Design</p>
-            </div>
-          </div>
+          <p className="mt-7 max-w-[430px] text-base md:text-lg xl:text-xl leading-7 text-slate-500">
+            Explore the programs, missions and student work behind this learning system.
+          </p>
         </div>
       </div>
 
