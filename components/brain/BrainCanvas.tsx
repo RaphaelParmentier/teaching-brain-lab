@@ -164,7 +164,7 @@ export default function BrainCanvas() {
         </p>
       </div>
 
-      <div className="absolute right-10 top-10 z-30">
+      <div className="mt-8">
         <LearningJourney onOpen={() => setSelectedNode(null)} />
       </div>
 
