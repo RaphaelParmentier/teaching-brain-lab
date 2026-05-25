@@ -114,9 +114,7 @@ function getCurve(from: Position, to: Position, kind: string) {
 }
 
 export default function BrainCanvas() {
-  const [selectedNode, setSelectedNode] = useState<BrainNodeData | null>(
-    brainNodes[0]
-  );
+  const [selectedNode, setSelectedNode] = useState<BrainNodeData | null>(null);
 
   const activeNodeId = selectedNode?.id ?? "core";
   const activeRouteIds = semanticRoutes[activeNodeId] ?? [];
@@ -162,10 +160,43 @@ export default function BrainCanvas() {
           reasoning, machine learning and AI workflows connect into professional
           deliverables.
         </p>
-      </div>
+        <div className="mt-8 max-w-md">
+          <p className="mb-4 text-sm leading-6 text-slate-300">
+            Explore real teaching programs, applied learning missions and realistic
+            student deliverables built around Data Science, Statistics, Machine
+            Learning and AI workflows.
+          </p>
 
-      <div className="mt-8">
-        <LearningJourney onOpen={() => setSelectedNode(null)} />
+          <LearningJourney onOpen={() => setSelectedNode(null)} />
+
+          <div className="mt-5 rounded-2xl border border-orange-400/15 bg-orange-400/5 p-4">
+            <div className="flex flex-wrap gap-2">
+              <span className="rounded-full border border-orange-400/20 bg-orange-400/10 px-3 py-1 text-xs font-semibold text-orange-200">
+                6 Teaching Missions
+              </span>
+
+              <span className="rounded-full border border-cyan-400/20 bg-cyan-400/10 px-3 py-1 text-xs font-semibold text-cyan-200">
+                Student Deliverables
+              </span>
+
+              <span className="rounded-full border border-cyan-400/20 bg-cyan-400/10 px-3 py-1 text-xs font-semibold text-cyan-200">
+                RMarkdown Workflows
+              </span>
+
+              <span className="rounded-full border border-cyan-400/20 bg-cyan-400/10 px-3 py-1 text-xs font-semibold text-cyan-200">
+                Data & AI Projects
+              </span>
+            </div>
+
+            <div className="mt-4 space-y-2 text-sm text-slate-300">
+              <p>✓ FoodTech Expansion Strategy</p>
+              <p>✓ European Economic Indicators</p>
+              <p>✓ Renault vs Tesla Analytics</p>
+              <p>✓ Healthcare Prediction</p>
+              <p>✓ AI Assistant Design</p>
+            </div>
+          </div>
+        </div>
       </div>
 
       <div className="absolute inset-0 z-10">

@@ -34,9 +34,30 @@ export default function LearningJourney({ onOpen }: LearningJourneyProps) {
       <button
         type="button"
         onClick={handleOpen}
-        className="rounded-full border border-orange-400/30 bg-orange-400/10 px-6 py-3 text-sm font-semibold uppercase tracking-[0.22em] text-orange-200 shadow-[0_0_35px_rgba(249,115,22,0.18)] backdrop-blur-xl transition hover:bg-orange-400/20"
+        className="
+          group
+          rounded-2xl
+          border
+          border-orange-400/40
+          bg-gradient-to-r
+          from-orange-500/20
+          to-orange-400/10
+          px-7
+          py-4
+          text-sm
+          font-bold
+          uppercase
+          tracking-[0.22em]
+          text-orange-100
+          shadow-[0_0_40px_rgba(249,115,22,0.28)]
+          transition-all
+          duration-300
+          hover:scale-[1.02]
+          hover:border-orange-300
+          hover:shadow-[0_0_60px_rgba(249,115,22,0.45)]
+        "
       >
-        Explore Teaching System
+        View Programs & Student Deliverables
       </button>
 
       {isOpen && (

@@ -40,21 +40,13 @@ export default function ResponsiveTeachingLab() {
           </div>
 
           <h1 className="mt-7 max-w-4xl text-5xl font-semibold leading-[0.92] tracking-[-0.065em] text-white sm:text-6xl lg:text-7xl">
-            Teaching Brain Lab.
+            Teaching data and AI through real projects.
           </h1>
 
           <p className="mt-6 max-w-2xl text-base leading-7 text-slate-300 sm:text-lg">
-            A responsive version of the teaching system: applied Data,
-            Statistics, Machine Learning and AI education through realistic
-            missions and student outputs.
+            A practical view of how I teach data, statistics, machine learning and AI:
+            through applied projects, reproducible workflows and student deliverables.
           </p>
-
-          <a
-            href="#teaching-system"
-            className="mt-8 inline-flex rounded-full border border-orange-400/40 bg-orange-400/15 px-6 py-3 text-sm font-semibold uppercase tracking-[0.18em] text-orange-200 transition hover:bg-orange-400/25"
-          >
-            Explore the Teaching System
-          </a>
         </div>
       </section>
 
