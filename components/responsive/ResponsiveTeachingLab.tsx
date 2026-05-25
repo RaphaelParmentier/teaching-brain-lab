@@ -12,6 +12,7 @@ export default function ResponsiveTeachingLab() {
   const [selectedProgramId, setSelectedProgramId] = useState(
     teachingPrograms[0].id,
   );
+
   const [selectedMission, setSelectedMission] =
     useState<TeachingMission | null>(null);
 
@@ -46,8 +47,8 @@ export default function ResponsiveTeachingLab() {
           </h1>
 
           <p className="mt-6 max-w-2xl text-base leading-7 text-slate-300 sm:text-lg">
-            Students learn by cleaning data, building analyses, comparing
-            models and explaining decisions.
+            Students learn by cleaning data, building analyses, comparing models
+            and explaining decisions.
           </p>
         </div>
       </section>
@@ -82,13 +83,17 @@ export default function ResponsiveTeachingLab() {
             <p className="text-xs font-bold uppercase tracking-[0.22em] text-orange-300">
               During the course
             </p>
-            <p className="mt-3 text-sm leading-7 text-slate-200">
+
+            <p className="mt-3 text-sm leading-7 text-slate-200 sm:text-base">
               {selectedProgram.objective}
             </p>
           </div>
 
           <div className="mt-6 grid gap-4 lg:grid-cols-3">
-            <ChipBlock title="Practiced skills" items={selectedProgram.skills} />
+            <ChipBlock
+              title="Practiced skills"
+              items={selectedProgram.skills}
+            />
             <ChipBlock title="Key ideas" items={selectedProgram.concepts} />
             <ChipBlock title="Tools used" items={selectedProgram.tools} />
           </div>
@@ -110,8 +115,8 @@ export default function ResponsiveTeachingLab() {
                     {mission.category}
                   </span>
 
-                  <span className="text-xs uppercase tracking-[0.16em] text-slate-400">
-                    {mission.duration}
+                  <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em] text-slate-300">
+                    {mission.level}
                   </span>
                 </div>
 
@@ -120,12 +125,16 @@ export default function ResponsiveTeachingLab() {
                 </h3>
 
                 <p className="mt-4 text-sm leading-7 text-slate-300">
+                  {mission.challenge}
+                </p>
+
+                <p className="mt-3 text-sm leading-7 text-slate-400">
                   {mission.context}
                 </p>
 
                 <div className="mt-6">
                   <p className="text-xs font-bold uppercase tracking-[0.22em] text-orange-300">
-                    Outputs
+                    Students produce
                   </p>
 
                   <ul className="mt-3 space-y-2">
@@ -144,7 +153,7 @@ export default function ResponsiveTeachingLab() {
                 <button
                   type="button"
                   onClick={() => setSelectedMission(mission)}
-                  className="mt-6 rounded-full border border-orange-400/30 bg-orange-400/10 px-5 py-2 text-sm font-semibold text-orange-200 transition hover:bg-orange-400/20"
+                  className="mt-6 rounded-full border border-orange-400/30 bg-orange-400/10 px-5 py-2 text-sm font-semibold text-orange-200 transition hover:border-orange-300 hover:bg-orange-400/20"
                 >
                   View student outputs
                 </button>
@@ -167,6 +176,7 @@ export default function ResponsiveTeachingLab() {
                 <h3 className="text-xl font-semibold tracking-[-0.04em] text-white">
                   {item.title}
                 </h3>
+
                 <p className="mt-3 text-sm leading-6 text-slate-300">
                   {item.description}
                 </p>

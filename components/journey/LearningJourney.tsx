@@ -103,11 +103,11 @@ export default function LearningJourney({ onOpen }: LearningJourneyProps) {
                 What students learn
               </p>
 
-              <h3 className="mt-4 max-w-5xl text-7xl font-semibold leading-[0.95] tracking-[-0.065em] text-white">
+              <h3 className="mt-4 max-w-5xl text-[5.5rem] leading-[0.92] tracking-[-0.07em] font-semibold text-white">
                 {selectedProgram.title}
               </h3>
 
-              <p className="mt-6 max-w-4xl text-2xl leading-10 text-slate-300">
+              <p className="mt-6 max-w-4xl text-[1.8rem] leading-[1.6] text-slate-300">
                 {selectedProgram.tagline}
               </p>
 
@@ -123,12 +123,11 @@ export default function LearningJourney({ onOpen }: LearningJourneyProps) {
 
               <section className="mt-10">
                 <p className="text-sm font-bold uppercase tracking-[0.3em] text-orange-300">
-                  What students build
+                  Real student projects
                 </p>
 
                 <p className="mt-3 max-w-3xl text-lg leading-8 text-slate-400">
-                  Missions are practical cases, not abstract lessons. Students
-                  work with data, build outputs and defend decisions.
+                  Students work on realistic analytical problems and produce the same types of deliverables expected in professional environments.
                 </p>
 
                 <div className="mt-7 grid grid-cols-2 gap-6">

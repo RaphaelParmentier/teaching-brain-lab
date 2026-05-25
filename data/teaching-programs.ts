@@ -16,8 +16,8 @@ export interface TeachingProgram {
 export const teachingPrograms: TeachingProgram[] = [
   {
     id: "data-strategy",
-    title: "Data Strategy & Management",
-    tagline: "From raw data to actionable business insights.",
+    title: "Turn Data Into Business Decisions",
+    tagline: "From messy spreadsheets to actionable insights.",
     level: "Beginner → Intermediate",
     format: "Academic module, workshop or custom training",
     objective:
@@ -45,8 +45,8 @@ export const teachingPrograms: TeachingProgram[] = [
   },
   {
     id: "statistical-reasoning",
-    title: "Statistical Reasoning",
-    tagline: "Evidence-based thinking under uncertainty.",
+    title: "Make Decisions With Evidence",
+    tagline: "Understand uncertainty and interpret results correctly.",
     level: "Intermediate",
     format: "Academic module or applied case study",
     objective:
@@ -74,8 +74,8 @@ export const teachingPrograms: TeachingProgram[] = [
   },
   {
     id: "ml-strategy",
-    title: "Machine Learning Strategy",
-    tagline: "Build, validate and explain predictive models.",
+    title: "Build Predictive Models And Explain Them",
+    tagline: "From model training to business interpretation.",
     level: "Intermediate → Advanced",
     format: "Technical module, bootcamp sequence or project-based course",
     objective:
@@ -103,8 +103,8 @@ export const teachingPrograms: TeachingProgram[] = [
   },
   {
     id: "ai-workflows",
-    title: "AI-Augmented Workflows",
-    tagline: "Understand and use modern AI systems effectively.",
+    title: "Use AI Professionally And Critically",
+    tagline: "Design reliable AI workflows instead of relying on trial and error.",
     level: "Beginner → Advanced",
     format: "Workshop, executive training or applied AI module",
     objective:

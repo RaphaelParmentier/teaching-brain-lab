@@ -2,16 +2,16 @@ export const learningPhilosophy = [
   {
     title: "Learning by Doing",
     description:
-      "Students learn through realistic projects, practical challenges and concrete deliverables rather than passive theory alone.",
+      "Students learn by building real deliverables rather than completing isolated exercises.",
   },
   {
     title: "Evidence-Based Thinking",
     description:
-      "Every analytical decision must be supported by data, statistical reasoning and clear interpretation of uncertainty.",
+      "Every conclusion must be supported by data, reasoning and clear communication.",
   },
   {
     title: "Professional Workflows",
     description:
-      "Activities reproduce real-world practices used in analytics, machine learning, reporting and AI-assisted work.",
+      "Projects reproduce the tools, expectations and constraints found in industry.",
   },
 ];
