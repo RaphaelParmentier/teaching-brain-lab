@@ -87,6 +87,10 @@ export default function ResponsiveTeachingLab() {
             <p className="mt-3 text-sm leading-7 text-slate-200 sm:text-base">
               {selectedProgram.objective}
             </p>
+
+            <p className="mt-4 text-sm leading-7 text-slate-400">
+              {selectedProgram.expectedOutcome}
+            </p>
           </div>
 
           <div className="mt-6 grid gap-4 lg:grid-cols-3">

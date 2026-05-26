@@ -45,10 +45,11 @@ export default function LearningJourney({ onOpen }: LearningJourneyProps) {
       </button>
 
       {isOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-[clamp(1rem,2vw,2rem)] backdrop-blur-md">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/82 p-[clamp(1rem,2vw,2rem)] backdrop-blur-md">
           <div className="grid h-[88vh] w-[94vw] max-w-[1840px] grid-cols-[clamp(330px,23vw,410px)_1fr] overflow-hidden rounded-[2rem] border border-white/10 bg-[#080D1C]/96 shadow-[0_0_110px_rgba(0,0,0,0.88)]">
             <aside className="border-r border-white/10 p-[clamp(1.5rem,1.5vw,2rem)]">
               <div className="inline-flex items-center gap-3 rounded-full border border-orange-400/30 bg-orange-400/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.25em] text-orange-300">
+                <span className="h-2 w-2 rounded-full bg-orange-400 shadow-[0_0_18px_rgba(249,115,22,0.95)]" />
                 RP Systems • Teaching
               </div>
 
@@ -57,8 +58,8 @@ export default function LearningJourney({ onOpen }: LearningJourneyProps) {
               </h2>
 
               <p className="mt-5 text-[clamp(1rem,0.9vw,1.25rem)] leading-8 text-slate-300">
-                Pick a program and see what students actually practice,
-                produce and explain.
+                Pick a program and see what students practice, produce and
+                explain.
               </p>
 
               <div className="mt-8 space-y-3">
@@ -69,8 +70,8 @@ export default function LearningJourney({ onOpen }: LearningJourneyProps) {
                     onClick={() => setSelectedProgram(program)}
                     className={`flex w-full items-start gap-4 rounded-2xl border px-4 py-4 text-left transition ${
                       selectedProgram.id === program.id
-                        ? "border-orange-400/50 bg-orange-400/14"
-                        : "border-white/10 bg-white/5 hover:bg-white/10"
+                        ? "border-orange-400/50 bg-orange-400/14 shadow-[0_0_28px_rgba(249,115,22,0.12)]"
+                        : "border-white/10 bg-white/5 hover:border-white/20 hover:bg-white/10"
                     }`}
                   >
                     <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-white/10 bg-black/30 text-sm font-semibold text-orange-200">
@@ -78,7 +79,7 @@ export default function LearningJourney({ onOpen }: LearningJourneyProps) {
                     </span>
 
                     <div>
-                      <p className="text-base font-semibold text-white">
+                      <p className="text-base font-semibold leading-6 text-white">
                         {program.title}
                       </p>
                       <p className="mt-1 text-xs uppercase tracking-[0.18em] text-slate-400">
@@ -94,7 +95,7 @@ export default function LearningJourney({ onOpen }: LearningJourneyProps) {
               <button
                 type="button"
                 onClick={() => setIsOpen(false)}
-                className="absolute right-8 top-8 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-slate-300 hover:bg-white/10"
+                className="absolute right-8 top-8 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-slate-300 transition hover:bg-white/10 hover:text-white"
               >
                 Close
               </button>
@@ -103,7 +104,7 @@ export default function LearningJourney({ onOpen }: LearningJourneyProps) {
                 What students learn
               </p>
 
-              <h3 className="mt-4 max-w-5xl text-[clamp(4rem,4.25vw,6.5rem)] font-semibold leading-[0.92] tracking-[-0.07em] text-white">
+              <h3 className="mt-4 max-w-5xl pr-24 text-[clamp(4rem,4.25vw,6.5rem)] font-semibold leading-[0.92] tracking-[-0.07em] text-white">
                 {selectedProgram.title}
               </h3>
 
@@ -119,6 +120,10 @@ export default function LearningJourney({ onOpen }: LearningJourneyProps) {
                 <p className="mt-4 max-w-5xl text-[clamp(1.1rem,1vw,1.45rem)] leading-8 text-slate-200">
                   {selectedProgram.objective}
                 </p>
+
+                <p className="mt-5 max-w-5xl text-[clamp(0.95rem,0.82vw,1.15rem)] leading-7 text-slate-400">
+                  {selectedProgram.expectedOutcome}
+                </p>
               </section>
 
               <section className="mt-10">
@@ -127,8 +132,8 @@ export default function LearningJourney({ onOpen }: LearningJourneyProps) {
                 </p>
 
                 <p className="mt-3 max-w-3xl text-[clamp(1rem,0.9vw,1.25rem)] leading-8 text-slate-400">
-                  Students work on realistic analytical problems and produce
-                  the same types of deliverables expected in professional
+                  Students work on realistic analytical problems and produce the
+                  same types of deliverables expected in professional
                   environments.
                 </p>
 
